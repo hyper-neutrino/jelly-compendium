@@ -1,0 +1,22 @@
+{%- extends "layout.html" -%}
+
+{%- block content -%}
+  <h3>Character Page - <code>{{ char }}</code></h3>
+
+  {%- for category, key in [["Atoms", "atoms"], ["Quicks", "quicks"], ["Syntactical Components", "syntax"], ["Miscellaneous", "misc"]] -%}
+    {%- if data[key] -%}
+      <h5>{{ category }}</h5>
+      <ul class="larger-text">
+        {%- for item in data[key] -%}
+          <li><a href="/{{ key }}/{{ item['id'] }}"><code>{{ item["symbol"] }}</code> - {{ item["name"] }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if data["unused"] -%}
+    <p>This character is currently not used by any atoms or quicks and does not have a special syntactical meaning. It is still used for things like string and number literals.</p>
+  {%- elif not data["exact"] -%}
+    <p>This character is used as a component in an atom or quick or has special syntactical meaning, but not on its own. Its behavior when not in an appropriate group may be undefined or cause errors.</p>
+  {%- endif -%}
+{%- endblock -%}
