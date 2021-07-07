@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from page_generators import *
+
+from flask import Flask, abort, render_template
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -7,6 +9,33 @@ CORS(app)
 @app.route("/")
 def serve_root():
     return render_template("index.html")
+
+@app.route("/codepage")
+def serve_codepage():
+    return render_template("codepage.html", codepage = codepage)
+
+@app.route("/codepage/<int:index>")
+def serve_charpage(index):
+    if 0 <= index < 256:
+        char = codepage[index]
+        return render_template("charpage.html", data = charmap[char], char = char)
+    abort(404)
+
+@app.route("/misc/<id>")
+def serve_misc(id):
+    return render_template(f"{id}.html")
+
+@app.route("/<category>/<id>")
+def serve_category(category, id):
+    if category not in ["atoms", "quicks", "syntax"]:
+        abort(404)
+    if id not in data[category]:
+        abort(404)
+    return render_template(f"{category}.html", codepage = codepage, data = data[category][id])
+
+@app.errorhandler(404)
+def serve_404(e):
+    return render_template("404.html")
 
 if __name__ == "__main__":
     app.run()
