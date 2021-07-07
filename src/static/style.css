@@ -1,17 +1,17 @@
 @font-face {
   font-family: "Exo 2";
-  src: url(/static/static/Exo2-Light.ttf);
+  src: url(/static/fonts/static/Exo2-Light.ttf);
 }
 
 @font-face {
   font-family: "Exo 2";
   font-weight: bold;
-  src: url(/static/static/Exo2-SemiBold.ttf);
+  src: url(/static/fonts/static/Exo2-SemiBold.ttf);
 }
 
 @font-face {
   font-family: "DejaVu Sans Mono";
-  src: url(/static/DejaVuSansMono.ttf);
+  src: url(/static/fonts/DejaVuSansMono.ttf);
 }
 
 html, body {
@@ -27,17 +27,16 @@ body {
 }
 
 code {
-  font-family: "DejaVu Sans Mono";
+  font-family: "DejaVu Sans Mono", monospace;
   background-color: #eee;
   font-size: 85%;
 }
 
-code.block {
-  padding: 5px;
+pre code {
   border-radius: 5px;
 }
 
-code:not(.block) {
+code {
   padding: 2px 5px;
   border-radius: 2px;
 }
@@ -57,4 +56,61 @@ main {
 
 footer {
   padding: 2em 10vw;
+}
+
+hr {
+  border: 1px #ddf solid;
+  width: 60vw;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+table.codepage-table {
+  font-family: "DejaVu Sans Mono", monospace;
+  table-layout: fixed;
+  display: table-cell;
+  padding: 0;
+}
+
+table.codepage-table tr {
+  height: 3em;
+  padding: 0;
+}
+
+table.codepage-table td {
+  border: 1px solid #bbd;
+  border-collapse: collapse;
+  width: 3em;
+  padding: 0;
+}
+
+td.codepage-td a {
+  background-color: #eee;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+main ul:not(.browser-default) li {
+  list-style-type: disc;
+  margin-left: 1em;
+  padding-left: 0.5em;
+}
+
+ul.larger-text {
+  font-size: 110%;
+}
+
+kbd {
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 85%;
+  color: #333;
+  border: 1px solid #eef;
+  border-radius: 2px;
+  background-color: #cde;
+  padding: 2px 5px;
+}
+
+footer a {
+  color: #33c;
 }
