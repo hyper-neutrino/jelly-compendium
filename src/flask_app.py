@@ -16,6 +16,10 @@ def serve_codepage():
 
 @app.route("/codepage/<int:index>")
 def serve_charpage(index):
+    if index == 32:
+        return render_template("spacepage.html")
+    if index == 127:
+        return render_template("newlinepage.html")
     if 0 <= index < 256:
         char = codepage[index]
         return render_template("charpage.html", data = charmap[char], char = char)

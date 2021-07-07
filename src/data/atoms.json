@@ -7,7 +7,7 @@
     "keywords": ["product", "multiply", "multiplication", "reduce"],
     "tags": ["array", "math", "number"],
     "tagline": "Return the product of a list.",
-    "description": "Given a list, multiply all of its values together (left-reduce by `×`). Errors for multiple string inputs; however, it is able to repeat strings so long as only one string is present. Beware that repeating strings via multiplication causes them to become multi-character Python strings, which Jelly cannot work with. See ||misc|jellystrings|| for more information.",
+    "description": "Given a list, multiply all of its values together (left-reduce by <code>×</code>). Errors for multiple string inputs; however, it is able to repeat strings so long as only one string is present. Beware that repeating strings via multiplication causes them to become multi-character Python strings, which Jelly cannot work with. See ||misc|jellystrings|| for more information.",
     "synonyms": ["×ƒ1"]
   },
   {
