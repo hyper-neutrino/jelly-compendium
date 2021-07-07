@@ -1,10 +1,24 @@
-{
-  "P": {
+[
+  {
+    "symbol": "P",
+    "id": "product",
+    "name": "Product",
     "arity": 1,
     "keywords": ["product", "multiply", "multiplication", "reduce"],
     "tags": ["array", "math", "number"],
     "tagline": "Return the product of a list.",
     "description": "Given a list, multiply all of its values together (left-reduce by `×`). Errors for multiple string inputs; however, it is able to repeat strings so long as only one string is present. Beware that repeating strings via multiplication causes them to become multi-character Python strings, which Jelly cannot work with. See ||misc|jellystrings|| for more information.",
     "synonyms": ["×ƒ1"]
+  },
+  {
+    "symbol": "Ø½",
+    "id": "one-two",
+    "name": "[1, 2]",
+    "arity": 0,
+    "keywords": ["constant"],
+    "tags": ["array", "math", "number"],
+    "tagline": "Returns the list <code>[1, 2]</code>.",
+    "description": "",
+    "synonyms": ["1,2"]
   }
-}
+]

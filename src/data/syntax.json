@@ -1,0 +1,11 @@
+[
+  {
+    "symbol": "»",
+    "id": "dictionary-compressed-string",
+    "name": "Dictionary-Compressed String Terminator",
+    "keywords": ["literal", "string", "terminator", "dictionary", "compressed", "compression"],
+    "tags": ["literal", "string"],
+    "tagline": "Terminate a compressed string. String literals begin with <a href='/syntax/begin-string'><code>“</code></a>.",
+    "description": "Rather than being evaluated literally, the characters are converted into a base-250 integer and converted to a string using Jelly's decompression function, <a href='https://github.com/DennisMitchell/jellylanguage/blob/master/jelly/interpreter.py#L1055'><code>sss</code></a>. You can convert strings to their compressed form using the <a href='/misc/string-compressor'>online tool</a>, which also explains the compression/decompression algorithm. For example, <code>“3ḅaė;œ»</code> evaluates to <code>Hello, World!</code> and <code>“½ċṭ6Ỵ“Ñ'ȯ6JƓ3»</code> evaluates to <code>[\"Code Golf\", \"Coding Challenges\"]</code>."
+  }
+]

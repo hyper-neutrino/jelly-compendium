@@ -1,0 +1,13 @@
+[
+  {
+    "symbol": "©",
+    "id": "copy-to-register",
+    "name": "Copy To Register",
+    "arity": 1,
+    "keywords": ["register"],
+    "tags": ["register"],
+    "tagline": "Save the result of a link to the register when it is called. Read more about the register <a href='/misc/register'>here</a>.",
+    "description": "Given a link of any arity, return a link of the same arity that returns the exact same value. When it is run, the result is saved to the register.",
+    "syntax": [["<link>©", "Modify <code>&lt;link&gt;</code> to save its result to the register"]]
+  }
+]
