@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/static/style.css" />
+
+    <title>Jelly Tutorial</title>
+  </head>
+
+  <body>
+    <header>
+      {%- block header -%}
+        {%- include "navbar.html" -%}
+      {%- endblock -%}
+    </header>
+    <main>
+      {%- block content -%}
+      {%- endblock -%}
+    </main>
+    <footer class="light-blue lighten-2">
+      {%- block footer -%}
+        &copy; 2021 hyper-neutrino
+      {%- endblock -%}
+    </footer>
+  </body>
+</html>

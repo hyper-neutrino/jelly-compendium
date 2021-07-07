@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "Exo 2";
+  src: url(/static/static/Exo2-Light.ttf);
+}
+
+@font-face {
+  font-family: "Exo 2";
+  font-weight: bold;
+  src: url(/static/static/Exo2-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: "DejaVu Sans Mono";
+  src: url(/static/DejaVuSansMono.ttf);
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Exo 2", sans-serif;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+code {
+  font-family: "DejaVu Sans Mono";
+  background-color: #eee;
+  font-size: 85%;
+}
+
+code.block {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+code:not(.block) {
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+.block {
+  display: block;
+}
+
+p {
+  font-size: 110%;
+}
+
+main {
+  flex: 1 0 auto;
+  padding: 0 10vw;
+}
+
+footer {
+  padding: 2em 10vw;
+}

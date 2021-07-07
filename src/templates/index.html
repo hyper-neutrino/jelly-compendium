@@ -1,0 +1,14 @@
+{%- extends "layout.html" -%}
+
+{%- block content -%}
+  <h3>Welcome to the Jelly Tutorial!</h3>
+  <p><a href="https://github.com/DennisMitchell/jellylanguage/">Jelly</a> is a recreational programming language created by <a href="https://codegolf.stackexchange.com/users/12012/dennis">Dennis Mitchell</a> for code golf, a competition to write the shortest code to complete a certain task. It is a <a href="https://en.wikipedia.org/wiki/Tacit_programming">tacit</a> programming language and is inspired by <a href="https://www.jsoftware.com/#/">J</a>, a practical tacit language.</p>
+  <p>Jelly uses a custom <a href="https://en.wikipedia.org/wiki/SBCS">Single Byte Character Set (SBCS)</a>, so each of its characters take one byte (this is important as code golf is usually scored in bytes, and not characters). Installation instructions are available on its <a href="https://github.com/DennisMitchell/jellylanguage/">GitHub repository</a>:</p>
+  <p><code class="block">
+    git clone -q https://github.com/DennisMitchell/jellylanguage.git<br />
+    cd jellylanguage<br />
+    pip3 install --upgrade --user .<br />
+    jelly eun '“3ḅaė;œ»'
+  </code></p>
+  <p>This should output <code>Hello, World!</code> to the console.</p>
+{%- endblock -%}
