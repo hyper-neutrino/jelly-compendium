@@ -172,3 +172,7 @@ span.key {
   margin: -10px;
   padding: 10px;
 }
+
+table.chaining-rules {
+  width: 25%;
+}
