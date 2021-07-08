@@ -82,7 +82,7 @@ $(document).ready(function() {
     update_byte_count(e.currentTarget);
     update_explain_link();
   });
-  $(".tio-field").on("focusin", function(e) {
+  $("#header, #code, #footer, #stdin, .argument").on("focusin", function(e) {
     window.last_focus = e.currentTarget.id;
   });
   $(document).keydown(function(e) {
@@ -99,19 +99,28 @@ function update_byte_count(element) {
   label.innerHTML = label.innerHTML.replace(/\d+ bytes?/, bytes + " byte" + "s".repeat(bytes != 1));
 }
 
+var counter = 0;
 function add_argument(e) {
+  counter++;
   var outer_box = document.createElement("div");
-  outer_box.innerHTML = "<div class='col s1'><button class='waves-effect light-blue btn add-argument'><i class='material-icons'>add</i></button></div><div class='col s10 input-field argument-inline'><textarea class='materialize-textarea monospace argument'></textarea></div><div class='col s1'><button class='waves-effect light-blue btn rm-argument'><i class='material-icons'>remove</i></button></div>";
+  outer_box.innerHTML = "<div class='col s1'><button class='waves-effect light-blue btn add-argument'><i class='material-icons'>add</i></button></div><div class='col s10 input-field argument-inline'><textarea id='argument-field-" + counter + "' class='materialize-textarea monospace argument'></textarea></div><div class='col s1'><button class='waves-effect light-blue btn rm-argument'><i class='material-icons'>remove</i></button></div>";
   outer_box.classList = "argument-box row center-contents";
   $(outer_box).insertBefore(e.parentNode);
-  $(outer_box.children[0]).click(add_argument);
-  $(outer_box.children[2]).click(rm_argument);
+  $(outer_box.children[0]).click(function(e) {
+    add_argument(e.currentTarget);
+  });
+  $(outer_box.children[1].children[0]).on("focusin", function(e) {
+    window.last_focus = e.currentTarget.id;
+  });
+  $(outer_box.children[2]).click(function(e) {
+    rm_argument(e.currentTarget);
+  });
   update_argument_count();
   return outer_box;
 }
 
 function rm_argument(e) {
-  e.parentNode.parentNode.remove();
+  e.parentNode.remove();
   update_argument_count();
 }
 
@@ -177,7 +186,6 @@ function run() {
       $("#stderr").val(result[1]);
 
       updateAll();
-      scroll();
 
       $("#run").text("RUN");
     });
