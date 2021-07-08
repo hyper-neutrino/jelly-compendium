@@ -46,4 +46,8 @@ def serve_404(e):
     return render_template("404.html")
 
 if __name__ == "__main__":
-    app.run()
+    import sys
+    if "port" in sys.argv:
+        app.run(port = int(sys.argv[sys.argv.index("port") + 1]))
+    else:
+        app.run()
