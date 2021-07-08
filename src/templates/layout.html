@@ -14,28 +14,32 @@
     <link rel="stylesheet" href="/static/highlight.css" />
     <link rel="stylesheet" href="/static/style.css" />
 
+    {% block head %} {% endblock %}
+
     <title>Jelly Tutorial</title>
   </head>
 
   <body>
     <header>
-      {%- block header -%}
-        {%- include "navbar.html" -%}
-      {%- endblock -%}
+      {% block header %}
+        {% include "navbar.html" %}
+      {% endblock %}
     </header>
     <main>
-      {%- block content -%}
-      {%- endblock -%}
+      {% block content %}
+      {% endblock %}
     </main>
     <footer class="light-blue lighten-2">
-      {%- block footer -%}
+      {% block footer %}
         &copy; 2021 hyper-neutrino - <a href="https://github.com/hyper-neutrino/jelly-tutorial">GitHub repository</a> - <a href="https://github.com/hyper-neutrino/jelly-tutorial/issues/new">Report a Bug</a>
-      {%- endblock -%}
+      {% endblock %}
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js" integrity="sha512-m2PhLxj2N91eYrIGU2cmIu2d0SkaE4A14bCjVb9zykvp6WtsdriFCiXQ/8Hdj0kssUB/Nz0dMBcoLsJkSCto0Q==" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
     <script src="/static/script.js"></script>
+
+    {% block tail %} {% endblock %}
   </body>
 </html>

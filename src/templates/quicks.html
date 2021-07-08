@@ -1,21 +1,21 @@
-{%- extends "layout.html" -%}
+{% extends "layout.html" %}
 
-{%- block content -%}
+{% block content %}
   <h3>Quick - <code>{{ data["symbol"] }}</code> - {{ data["name"] }}</h3>
-  <p>Characters:&nbsp;{%- for char in data["symbol"] -%} {%- if loop.index != 1 -%},&nbsp;{%- endif -%} {{ char | charlink }} {%- endfor -%}</p>
-  <p>Tags:&nbsp;{%- for tag in data["tags"] -%} {%- if loop.index != 1 -%},&nbsp;{%- endif -%} {{ tag | taglink }} {%- endfor -%} {%- if data["tags"] == [] -%} (none) {%- endif -%}</p>
-  <h5>Links Required:&nbsp;{%- if data["arity"] == None -%} Variable {%- else -%} {{ data["arity"] }} {%- endif -%}</h5>
+  <p>Characters:&nbsp;{% for char in data["symbol"] %} {% if loop.index != 1 %},&nbsp;{% endif %} {{ char | charlink }} {% endfor %}</p>
+  <p>Tags:&nbsp;{% for tag in data["tags"] %} {% if loop.index != 1 %},&nbsp;{% endif %} {{ tag | taglink }} {% endfor %} {% if data["tags"] == [] %} (none) {% endif %}</p>
+  <h5>Links Required:&nbsp;{% if data["arity"] == None %} Variable {% else %} {{ data["arity"] }} {% endif %}</h5>
   <h5>Functionality</h5>
   <p>{{ data["tagline"] | safe }}</p>
-  {%- if data["description"] -%}
+  {% if data["description"] %}
     <h5>Detailed Description</h5>
     <p>{{ data["description"] | safe }}</p>
-  {%- endif -%}
+  {% endif %}
   <h5>Syntax</h5>
   <p>(Here, nilads are denoted by digits, monads are denoted by uppercase letters, and dyads are denoted by mathematical operators, such as <code>+</code>, <code>×</code>, and <code>÷</code>.)</p>
   <ul>
-    {%- for key, val in data["syntax"] -%}
+    {% for key, val in data["syntax"] %}
       <li><code>{{ key }}</code> - {{ val | safe }}</li>
-    {%- endfor -%}
+    {% endfor %}
   </ul>
-{%- endblock -%}
+{% endblock %}
