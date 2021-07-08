@@ -20,7 +20,7 @@
   <br />
   <ul id="boxes" class="collapsible expandable">
     <li>
-      <div class="collapsible-header"><b id="keyboard-label">Keyboard</b></div>
+      <div class="collapsible-header"><i class="material-icons">keyboard</i><b id="keyboard-label">Keyboard</b></div>
       <div class="collapsible-body short">
         <table class="keyboard-table">
           {% for row in range(4) %}
@@ -35,7 +35,7 @@
         </table>
       </div>
     <li>
-      <div class="collapsible-header"><b id="header-label">Header: 0 bytes</b></div>
+      <div class="collapsible-header"><i class="material-icons">code</i><b id="header-label">Header: 0 bytes</b></div>
       <div class="collapsible-body short">
         <div class="input-field">
           <textarea id="header" class="materialize-textarea monospace tio-field"></textarea>
@@ -43,7 +43,7 @@
       </div>
     </li>
     <li class="active">
-      <div class="collapsible-header"><b id="code-label">Code: 0 bytes</b></div>
+      <div class="collapsible-header"><i class="material-icons">code</i><b id="code-label">Code: 0 bytes</b></div>
       <div class="collapsible-body short">
         <div class="input-field">
           <textarea id="code" class="materialize-textarea monospace tio-field"></textarea>
@@ -51,7 +51,7 @@
       </div>
     </li>
     <li>
-      <div class="collapsible-header"><b id="footer-label">Footer: 0 bytes</b></div>
+      <div class="collapsible-header"><i class="material-icons">code</i><b id="footer-label">Footer: 0 bytes</b></div>
       <div class="collapsible-body short">
         <div class="input-field">
           <textarea id="footer" class="materialize-textarea monospace tio-field"></textarea>
@@ -59,7 +59,7 @@
       </div>
     </li>
     <li>
-      <div class="collapsible-header"><b id="stdin-label">STDIN: 0 bytes</b></div>
+      <div class="collapsible-header"><i class="material-icons">input</i><b id="stdin-label">STDIN: 0 bytes</b></div>
       <div class="collapsible-body short">
         <div class="input-field">
           <textarea id="stdin" class="materialize-textarea monospace tio-field"></textarea>
@@ -67,13 +67,13 @@
       </div>
     </li>
     <li>
-      <div class="collapsible-header"><b id="args-label">Arguments (Niladic)</b></div>
+      <div class="collapsible-header"><i class="material-icons">input</i><b id="args-label">Arguments (Niladic)</b></div>
       <div id="argument-container" class="collapsible-body">
         <div class="row center-contents"><div class="col s1"><button id="append-argument" class="waves-effect light-blue btn add-argument"><i class="material-icons">add</i></button></div></div>
       </div>
     </li>
     <li class="active">
-      <div class="collapsible-header"><b id="stdout-label">STDOUT: 0 bytes</b></div>
+      <div class="collapsible-header"><i class="material-icons">desktop_windows</i><b id="stdout-label">STDOUT: 0 bytes</b></div>
       <div class="collapsible-body short">
         <div class="input-field">
           <textarea id="stdout" class="materialize-textarea monospace tio-field" readonly></textarea>
@@ -81,7 +81,7 @@
       </div>
     </li>
     <li class="active">
-      <div class="collapsible-header"><b id="stderr-label">STDERR: 0 bytes</b></div>
+      <div class="collapsible-header"><i class="material-icons">bug_report</i><b id="stderr-label">STDERR: 0 bytes</b></div>
       <div class="collapsible-body short">
         <div class="input-field">
           <textarea id="stderr" class="materialize-textarea monospace tio-field" readonly></textarea>
