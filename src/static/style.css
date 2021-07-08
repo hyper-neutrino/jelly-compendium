@@ -91,7 +91,22 @@ td.codepage-td a {
   border-radius: 5px;
 }
 
-main ul:not(.browser-default) li {
+table.search-option-table {
+  table-layout: fixed;
+  display: table-cell;
+}
+
+table.search-option-table tr {
+  padding: 0;
+  border: none;
+}
+
+table.search-option-table td {
+  border: none;
+  padding: 0.1em 1em;
+}
+
+main ul:not(.browser-default):not(.collapsible) li {
   list-style-type: disc;
   margin-left: 1em;
   padding-left: 0.5em;
@@ -113,4 +128,12 @@ kbd {
 
 footer a {
   color: #33c;
+}
+
+label {
+  color: #446;
+}
+
+table#search-results {
+  width: 90%;
 }

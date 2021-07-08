@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h3>Search</h3>
+  <p>Searching is implemented using a keyword searching system, so looking for keywords rather than trying to type sentences will give better results. This resource is most helpful if you already know what you are looking for and just want the characters to copy-paste. If you are having trouble finding a built-in, consider asking in <a href="https://chat.stackexchange.com/transcript/57815/jelly-hypertraining">Jelly Hypertraining</a>. If something does not appear under a certain keyword and you believe it should, consider opening an issue or pull request to the <a href="https://github.com/hyper-neutrino/jelly-tutorial">GitHub repository</a>. If you want to search by a specific character sequence in the description that isn't a keyword, consider using Ctrl-F on this page.</p>
+
+  <ul class="collapsible">
+    <li class="active">
+      <div class="collapsible-header">Filters</div>
+      <div class="collapsible-body">
+        <table class="search-option-table">
+          <tr>
+            <td>
+              Filter by type
+              <br />
+              <br />
+              <table class="search-option-table">
+                <tr>
+                  <td><label><input class="include" id="include-atoms" type="checkbox" data-category="atoms" /><span><b>Atoms</b></span></label></td>
+                  <td><label><input class="include" id="include-nilads" type="checkbox" data-category="nilads" /><span>Nilads</span></label></td>
+                  <td><label><input class="include" id="include-monads" type="checkbox" data-category="monads" /><span>Monads</span></label></td>
+                  <td><label><input class="include" id="include-dyads" type="checkbox" data-category="dyads" /><span>Dyads </span></label></td>
+                </tr>
+                <tr>
+                  <td><label><input class="include" id="include-quicks" type="checkbox" data-category="quicks" /><span><b>Quicks</b></span></label></td>
+                </tr>
+                <tr>
+                  <td><label><input class="include" id="include-syntax" type="checkbox" data-category="syntax" /><span><b>Syntax</b></span></label></td>
+                </tr>
+              </table>
+              <br />
+              Filter by tag
+              <br />
+              <br />
+              <table class="search-option-table">
+                {% for row in range(0, tags | length, 6) %}
+                  <tr>
+                    {% for tag in tags[row:row + 6] %}
+                      <td><label class="tagbox" data-name="{{ tag }}" data-info="{{ taginfo[tag] }}"><input class="tag" id="tag-{{ tag }}" type="checkbox" /><span>{{ tag }}</span></label></td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </table>
+            </td>
+            <td style="vertical-align: top">
+              <h6 id="tag-info-header">Tag Data</h6>
+              <p id="tag-info">Hover over a tag to see more information about it.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+  </ul>
+
+  <br /><br />
+
+  <center>
+    <div class="row">
+      <div class="input-field col s10 offset-s1">
+        <input id="search-box" type="text" />
+        <label for="search-box">Search by keywords</label>
+      </div>
+    </div>
+
+    <table id="search-results">
+      <tr>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Arity</th>
+        <th>Description</th>
+      </tr>
+      {% for item in data %}
+        <tr class="type-{{ item['type'] }}
+          {% if item['type'] == 'atoms' %}
+            type-{{ ['nilads', 'monads', 'dyads'][item['arity']] }}
+          {% endif %}
+          {% for tag in item['tags'] %}
+            tagged-{{ tag }}
+          {% endfor %}
+          {% for keyword in item['keywords'] %}
+            keyword-{{ keyword }}
+          {% endfor %}
+        ">
+          <td><code>{{ item["symbol"] }}</code></td>
+          <td>{{ item["name"] }}</td>
+          {% if item["type"] == "atoms" %}
+            <td>Atom</td>
+            <td>{{ ["niladic", "monadic", "dyadic"][item["arity"]] }} ({{ item["arity"] }})</td>
+          {% elif item["type"] == "quicks" %}
+            <td>Quick</td>
+            <td>{% if item["arity"] == None %} variable {% else %} {{ item["arity"] }} link{{ "s" * (item["arity"] != 1) }} {% endif %}</td>
+          {% elif item["type"] == "syntax" %}
+            <td>Syntax</td>
+            <td></td>
+          {% endif %}
+          <td>{{ item["tagline"] | safe }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </center>
+  <br /><br />
+{% endblock %}
+
+{% block tail %}
+  <script src="/static/search.js"></script>
+{% endblock %}

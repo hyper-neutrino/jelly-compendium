@@ -7,6 +7,9 @@ with open("src/data/codepage.txt", "r") as f:
     assert len(set(codepage)) >= 256, "the codepage is missing characters"
     assert len(codepage) <= 256, "the codepage has duplicate values or characters that do not belong"
 
+with open("src/data/tags.json", "r") as f:
+    tags = json.load(f)
+
 data = {
     "atoms": {},
     "quicks": {},
@@ -41,5 +44,5 @@ def charlink(char):
 FILTERS["charlink"] = charlink
 
 def taglink(tag):
-    return safe(f"<a href='/search?q=&tags={tag}'><kbd>{tag}</kbd></a>")
+    return safe(f"<a href='/search?tags={tag}'><kbd>{tag}</kbd></a>")
 FILTERS["taglink"] = taglink
