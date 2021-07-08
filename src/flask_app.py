@@ -27,7 +27,10 @@ def serve_charpage(index):
 
 @app.route("/misc/<id>")
 def serve_misc(id):
-    return render_template(f"misc/{id}.html")
+    try:
+        return render_template(f"misc/{id}.html")
+    except:
+        abort(404)
 
 @app.route("/<category>/<id>")
 def serve_category(category, id):
@@ -41,9 +44,25 @@ def serve_category(category, id):
 def serve_search():
     return render_template("search.html", data = sorted([{**item, "type": category} for category, values in data.items() for item in values.values()], key = lambda x: list(map(codepage.find, x["symbol"]))), tags = sorted({tag for category in ["atoms", "quicks", "syntax"] for item in data[category].values() for tag in item["tags"]}), taginfo = tags)
 
+@app.route("/resources")
+def serve_resources():
+    return render_template("resources.html")
+
+@app.route("/beginners")
+def serve_beginners():
+    return render_template("beginners.html")
+
+@app.route("/tio")
+def serve_tio():
+    return render_template("tryit.html")
+
 @app.errorhandler(404)
 def serve_404(e):
     return render_template("404.html")
+
+@app.errorhandler(500)
+def serve_500(e):
+    return render_template("500.html")
 
 if __name__ == "__main__":
     import sys

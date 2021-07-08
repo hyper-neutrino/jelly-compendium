@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h3>Beginners' Page</h3>
+  <p>Welcome to the landing page for Jelly beginners! This resource is intended to guide you from your very first encounter with Jelly to a point where you can practice solving problems, self-study, and seek help through other channels.</p>
+  <p>A couple of terms and conventions are important to establish and will be used throughout much of this page and this entire website:</p>
+  <ul class="larger-text">
+    <li><b>Arity</b> refers to the number of arguments that a function takes. A <em>niladic</em> function (nilad) takes zero (0) arguments, a <em>monadic</em> function (monad) takes one (1) argument, and a <em>dyadic</em> function (dyad) takes two (2) arguments.</li>
+    <li><b>Atoms</b> are Jelly's name for functions. These take values as arguments and produce values.</li>
+    <li><b>Quicks</b> are Jelly's name for operators / meta-functions. These consume some number of links that come before them and modify them or produce some other link.</li>
+    <li><b>Links</b> are lines of code in Jelly, similar to how one can define multiple functions in one file. The last link (separated by newlines or <code>¶</code>) is the "main link" and is executed when the program is run.</li>
+    <li><b>Links</b> also refer to any single function, whether it is an atom or the result of composing multiple atoms together with (a) quick(s). This terminology is a bit confusing, but it is the official naming scheme.</li>
+    <li><b>Chains</b> are groups of links written side-by-side. The functionality of chains depends on its arity and the chaining rules, which will be explored later.</li>
+    <li>Nilads will be represented by digits, monads by capital letters, and dyads by mathematical operators.</li>
+  </ul>
+  <h5>Tacit Programming</h5>
+  <p><a href="https://en.wikipedia.org/wiki/Tacit_programming">Tacit programming</a>, also known as point-free programming, is a paradigm where functions do not specify the arguments to which they apply or explicitly refer to their arguments. Instead, functions compose together to form more advanced combination functions. In Jelly, everything is a function (link) in the final parsed code, and its structure / order of evaluation and the arguments to which each function applies is determined by the arities. (Unlike APL, a practical tacit language, rather than determining the arity of a function via the structure, Jelly determines the structure based on the arity.)</p>
+  <p>Jelly has nilads available to access the command line arguments and the link's arguments. Using these usually results in a less golfy program, but moreover, it is not idiomatic to tacit programming, and it is good practice to avoid them and use the tacit structure to your advantage. There are cases where they will save bytes and be the optimal solution, but generally, it is good to avoid them.</p>
+  <p>Let us review a very basic example: <code>C+H</code>. <code>C</code> is a monad which takes a number <code>x</code> and returns <code>1 - x</code>. <code>+</code> is just addition (dyad). <code>H</code> is a monad which halves its argument; given <code>x</code>, it returns <code>x / 2</code>. We will run this link monadically as an example, using <code>x</code> as the generic argument. The value of the chain begins at the left argument (this is not always true, but we will get into that later on). The first pattern matched is the <code>C</code> monad. The value of the chain becomes <code>1 - x</code>. Next, the pattern matched is <code>+H</code>, which is a 2,1-chain that composes <code>+</code> and <code>H</code> to add (<code>+</code>) the left argument, <code>1 - x</code>, to the right argument, which is <code>H</code> applied to <code>x</code> (the halve atom applies to the left argument of the link, not this sub-chain, so it applies to <code>x</code> and not <code>1 - x</code>). Don't worry too much if this is confusing for now.</p>
+  <p>Therefore, overall, given <code>x</code>, it first computes <code>1 - x</code>, and then computes <code>(1 - x) + (x / 2)</code> or <code>1 - x / 2</code>. We never need to refer to <code>x</code> anywhere in our program, but rather roughly write out "take the complement and add it to half", and the functions compose together - that is the beauty of tacit programming.</p>
+  <h5>Your First Program</h5>
+
+  <br /><br />
+{% endblock %}
