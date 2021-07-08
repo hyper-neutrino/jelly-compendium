@@ -32,6 +32,10 @@ code {
   font-size: 85%;
 }
 
+.monospace {
+  font-family: "DejaVu Sans Mono", monospace;
+}
+
 pre code {
   border-radius: 5px;
 }
@@ -47,6 +51,10 @@ code {
 
 p {
   font-size: 110%;
+}
+
+button {
+
 }
 
 main {
@@ -136,4 +144,31 @@ label {
 
 table#search-results {
   width: 90%;
+}
+
+div.short {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+div.argument-inline {
+  padding: 0;
+  margin: 0;
+}
+
+.center-contents {
+  text-align: center;
+}
+
+textarea.tio-field {
+  line-height: 1.25em;
+}
+
+.crosshair {
+  cursor: crosshair;
+}
+
+span.key {
+  margin: -10px;
+  padding: 10px;
 }

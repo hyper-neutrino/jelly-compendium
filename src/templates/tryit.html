@@ -1,9 +1,98 @@
 {% extends "layout.html" %}
 
-{% block content %}
+{% block head %}
+  <script>
+    window.onbeforeunload = function() {
+      return true;
+    };
+  </script>
+{% endblock %}
 
+{% block content %}
+  <br />
+  <button id="run" class="waves-effect light-blue btn" onclick="run()">RUN</button>
+  <button class="waves-effect light-blue btn" onclick="link()">LINK</button>
+  <button class="waves-effect light-blue btn" onclick="format()">Format for SE</button>
+  <button class="waves-effect light-blue btn" onclick="cmc()">Format for CMC</button>
+  <button class="waves-effect light-blue btn" onclick="tio()">Generate corresponding TIO link</button>
+  <a href="/misc/explain" target="_blank" id="explainlink" class="waves-effect green btn">Explain this code</a>
+  <br />
+  <br />
+  <ul id="boxes" class="collapsible expandable">
+    <li>
+      <div class="collapsible-header"><b id="keyboard-label">Keyboard</b></div>
+      <div class="collapsible-body short">
+        <table class="keyboard-table">
+          {% for row in range(4) %}
+            <tr>
+              {% for col in range(64) %}
+                <td>
+                  <span class="monospace crosshair key" onclick="type({{ codepage[row * 64 + col] | repr }})">{{ codepage[row * 64 + col] }}</span>
+                </td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    <li>
+      <div class="collapsible-header"><b id="header-label">Header: 0 bytes</b></div>
+      <div class="collapsible-body short">
+        <div class="input-field">
+          <textarea id="header" class="materialize-textarea monospace tio-field"></textarea>
+        </div>
+      </div>
+    </li>
+    <li class="active">
+      <div class="collapsible-header"><b id="code-label">Code: 0 bytes</b></div>
+      <div class="collapsible-body short">
+        <div class="input-field">
+          <textarea id="code" class="materialize-textarea monospace tio-field"></textarea>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><b id="footer-label">Footer: 0 bytes</b></div>
+      <div class="collapsible-body short">
+        <div class="input-field">
+          <textarea id="footer" class="materialize-textarea monospace tio-field"></textarea>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><b id="stdin-label">STDIN: 0 bytes</b></div>
+      <div class="collapsible-body short">
+        <div class="input-field">
+          <textarea id="stdin" class="materialize-textarea monospace tio-field"></textarea>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><b id="args-label">Arguments (Niladic)</b></div>
+      <div id="argument-container" class="collapsible-body">
+        <div class="row center-contents"><div class="col s1"><button id="append-argument" class="waves-effect light-blue btn add-argument"><i class="material-icons">add</i></button></div></div>
+      </div>
+    </li>
+    <li class="active">
+      <div class="collapsible-header"><b id="stdout-label">STDOUT: 0 bytes</b></div>
+      <div class="collapsible-body short">
+        <div class="input-field">
+          <textarea id="stdout" class="materialize-textarea monospace tio-field" readonly></textarea>
+        </div>
+      </div>
+    </li>
+    <li class="active">
+      <div class="collapsible-header"><b id="stderr-label">STDERR: 0 bytes</b></div>
+      <div class="collapsible-body short">
+        <div class="input-field">
+          <textarea id="stderr" class="materialize-textarea monospace tio-field" readonly></textarea>
+        </div>
+      </div>
+    </li>
+  </ul>
 {% endblock %}
 
 {% block tail %}
-  <script src="static/tio.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js" integrity="sha512-yJSo0YTQvvGOqL2au5eH0W4K/0FI0sTJuyHjiHkh0O31Lzlb814P0fDXtuEtzOj13lOBZ9j99BjqFx4ASz9pGA==" crossorigin="anonymous"></script>
+  <script src="/static/tio.js"></script>
+  <script src="/static/shortcut.js"></script>
 {% endblock %}

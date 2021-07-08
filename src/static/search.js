@@ -17,10 +17,10 @@ $(document).ready(function() {
 
   update_search();
 
-  $(".tagbox").each((index, element) => {
+  $(".tagbox").each(function(index, element) {
     var tagname = $(element).attr("data-name");
     var taginfo = $(element).attr("data-info");
-    $(element).hover(e => {
+    $(element).hover(function(e) {
       if (e.type == "mouseenter") {
         $("#tag-info-header").html("<a href='/search?tags=" + tagname + "'><kbd>" + tagname + "</kbd></a>");
         $("#tag-info").html(taginfo);
@@ -28,11 +28,11 @@ $(document).ready(function() {
     });
   });
 
-  $("input").on("input", () => {
+  $("input").on("input", function() {
     update_search();
   });
 
-  $("body").on("keydown", e => {
+  $("body").on("keydown", function(e) {
     if (e.keyCode == 27) {
       $("#search-box").focus();
     }
@@ -43,12 +43,12 @@ function get_search() {
   var include = [];
   var tags = [];
   var query = $("#search-box").val();
-  $(".include").each((index, element) => {
+  $(".include").each(function(index, element) {
     if (element.checked) {
       include.push(element.getAttribute("data-category"));
     }
   });
-  $(".tag").each((index, element) => {
+  $(".tag").each(function(index, element) {
     if (element.checked) {
       tags.push(element.parentNode.getAttribute("data-name"));
     }
@@ -63,19 +63,25 @@ function update_search() {
     query_args.push("q=" + encodeURIComponent(query));
   }
   if (include.length) {
-    query_args.push("i=" + include.map(x => encodeURIComponent(x)).join("+"));
+    query_args.push("i=" + include.map(function(x) {
+      return encodeURIComponent(x);
+    }).join("+");
   }
   if (tags.length) {
-    query_args.push("tags=" + tags.map(x => encodeURIComponent(x)).join("+"));
+    query_args.push("tags=" + tags.map(function(x) {
+      return encodeURIComponent(x);
+    }).join("+"));
   }
   window.history.replaceState("", "", "?" + query_args.join("&"));
 
   var do_major_types = include.indexOf("atoms") != -1 || include.indexOf("quicks") != -1 || include.indexOf("syntax") != -1;
   var do_minor_types = include.indexOf("nilads") != -1 || include.indexOf("monads") != -1 || include.indexOf("dyads") != -1;
 
-  var keywords = query.split(/\W+/).filter(x => x.length);
+  var keywords = query.split(/\W+/).filter(function(x) {
+    return x.length;
+  });
 
-  $("table#search-results tr").each((index, element) => {
+  $("table#search-results tr").each(function(index, element) {
     if (index == 0) return;
     var tagged = false;
     var kws = [];

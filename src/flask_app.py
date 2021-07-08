@@ -54,7 +54,7 @@ def serve_beginners():
 
 @app.route("/tio")
 def serve_tio():
-    return render_template("tryit.html")
+    return render_template("tryit.html", codepage = codepage)
 
 @app.errorhandler(404)
 def serve_404(e):

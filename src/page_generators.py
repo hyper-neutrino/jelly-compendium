@@ -46,3 +46,7 @@ FILTERS["charlink"] = charlink
 def taglink(tag):
     return safe(f"<a href='/search?tags={tag}'><kbd>{tag}</kbd></a>")
 FILTERS["taglink"] = taglink
+
+def _repr(item):
+    return repr(item)
+FILTERS["repr"] = _repr
