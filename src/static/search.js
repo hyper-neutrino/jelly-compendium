@@ -65,7 +65,7 @@ function update_search() {
   if (include.length) {
     query_args.push("i=" + include.map(function(x) {
       return encodeURIComponent(x);
-    }).join("+");
+    }).join("+"));
   }
   if (tags.length) {
     query_args.push("tags=" + tags.map(function(x) {
@@ -77,8 +77,10 @@ function update_search() {
   var do_major_types = include.indexOf("atoms") != -1 || include.indexOf("quicks") != -1 || include.indexOf("syntax") != -1;
   var do_minor_types = include.indexOf("nilads") != -1 || include.indexOf("monads") != -1 || include.indexOf("dyads") != -1;
 
-  var keywords = query.split(/\W+/).filter(function(x) {
-    return x.length;
+  var keywords = query.split(/\W+/).map(function(x) {
+    return x.toLowerCase();
+  }).filter(function(x) {
+    return x.length && ["and", "or", "of", "the", "in", "from", "to", "for", "as", "a"].indexOf(x) == -1;
   });
 
   $("table#search-results tr").each(function(index, element) {

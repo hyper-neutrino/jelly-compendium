@@ -82,16 +82,16 @@
             keyword-{{ keyword }}
           {% endfor %}
         ">
-          <td><code>{{ item["symbol"] }}</code></td>
-          <td>{{ item["name"] }}</td>
+          <td><a href="/{{ item['type'] }}/{{ item['id'] }}" target="_blank"><code>{{ item["symbol"] }}</code></a></td>
+          <td><a href="/{{ item['type'] }}/{{ item['id'] }}" target="_blank">{{ item["name"] }}</a></td>
           {% if item["type"] == "atoms" %}
-            <td>Atom</td>
+            <td><a href="/beginners#terminology" target="_blank">Atom</a></td>
             <td>{{ ["niladic", "monadic", "dyadic"][item["arity"]] }} ({{ item["arity"] }})</td>
           {% elif item["type"] == "quicks" %}
-            <td>Quick</td>
+            <td><a href="/beginners#terminology" target="_blank">Quick</a></td>
             <td>{% if item["arity"] == None %} variable {% else %} {{ item["arity"] }} link{{ "s" * (item["arity"] != 1) }} {% endif %}</td>
           {% elif item["type"] == "syntax" %}
-            <td>Syntax</td>
+            <td><a href="/beginners#jelly-syntax" target="_blank">Syntax</a></td>
             <td></td>
           {% endif %}
           <td>{{ item["tagline"] | safe }}</td>

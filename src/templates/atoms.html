@@ -19,12 +19,12 @@
   <h5>Functionality</h5>
   <p>{{ data["tagline"] | safe }}</p>
   {% if data["description"] %}
-    <h5>Detailed Description</h5>
+    <h5>Details</h5>
     <p>{{ data["description"] | safe }}</p>
   {% endif %}
   {% if data["synonyms"] %}
     <h5>Synonyms</h5>
-    <p>This atom should work roughly the same way as the following code snippets (some edge case exceptions may exist):</p>
+    <p>This atom should work roughly the same way as or very similarly in concept to the following code snippets (some edge case exceptions may exist):</p>
     <ul>
       {% for synonym in data["synonyms"] %}
         <li><code>{{ synonym }}</code></li>
