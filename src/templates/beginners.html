@@ -4,9 +4,10 @@
   <h3>Beginners' Page</h3>
   <p>Welcome to the landing page for Jelly beginners! This resource is intended to guide you from your very first encounter with Jelly to a point where you can practice solving problems, self-study, and seek help through other channels.</p>
   <ul class="collapsible expandable">
-    <li class="active">
+    <li id="terminology">
       <div class="collapsible-header"><b>Conventions and Terminology</b></div>
       <div class="collapsible-body">
+        <span><a href="#terminology"><i class="material-icons">link</i></a></span><br />
         <p>A couple of terms and conventions are important to establish and will be used throughout much of this page and this entire website:</p>
         <ul class="larger-text">
           <li><b>Arity</b> refers to the number of arguments that a function takes. A <em>niladic</em> function (nilad) takes zero (0) arguments, a <em>monadic</em> function (monad) takes one (1) argument, and a <em>dyadic</em> function (dyad) takes two (2) arguments.</li>
@@ -17,20 +18,23 @@
           <li><b>Chains</b> are groups of links written side-by-side. The functionality of chains depends on its arity and the chaining rules, which will be explored later.</li>
         </ul>
         <p>Throughout this section, we will represent nilads with digits, monads with uppercase letters, and dyads with mathematical operators, such as <code>+ × ÷</code>.</p>
+        <p>Jelly is 1-indexed, meaning that the first index in a list is <code>1</code> and the last index is the length. Index access in lists wraps around, so <code>0</code> refers to the last element, and index <code>5</code> in a length-3 list points to the second value.</p>
       </div>
     </li>
-    <li class="active">
+    <li id="tacit">
       <div class="collapsible-header"><b>Tacit Programming</b></div>
       <div class="collapsible-body">
+        <span><a href="#tacit"><i class="material-icons">link</i></a></span><br />
         <p><a href="https://en.wikipedia.org/wiki/Tacit_programming">Tacit programming</a>, also known as point-free programming, is a paradigm where functions do not specify the arguments to which they apply or explicitly refer to their arguments. Instead, functions compose together to form more advanced combination functions. In Jelly, everything is a function (link) in the final parsed code, and its structure / order of evaluation and the arguments to which each function applies is determined by the arities. (Unlike APL, a practical tacit language, rather than determining the arity of a function via the structure, Jelly determines the structure based on the arity.)</p>
         <p>Jelly has nilads available to access the command line arguments and the link's arguments. Using these usually results in a less golfy program, but moreover, it is not idiomatic to tacit programming, and it is good practice to avoid them and use the tacit structure to your advantage. There are cases where they will save bytes and be the optimal solution, but generally, it is good to avoid them.</p>
         <p>Let us review a very basic example: <code>C+H</code>. <code>C</code> is a monad which takes a number <code>x</code> and returns <code>1 - x</code>. <code>+</code> is just addition (dyad). <code>H</code> is a monad which halves its argument; given <code>x</code>, it returns <code>x / 2</code>. We will run this link monadically as an example, using <code>x</code> as the generic argument. The value of the chain begins at the left argument (this is not always true, but we will get into that later on). The first pattern matched is the <code>C</code> monad. The value of the chain becomes <code>1 - x</code>. Next, the pattern matched is <code>+H</code>, which is a 2,1-chain that composes <code>+</code> and <code>H</code> to add (<code>+</code>) the left argument, <code>1 - x</code>, to the right argument, which is <code>H</code> applied to <code>x</code> (the halve atom applies to the left argument of the link, not this sub-chain, so it applies to <code>x</code> and not <code>1 - x</code>). Don't worry too much if this is confusing for now.</p>
         <p>Therefore, overall, given <code>x</code>, it first computes <code>1 - x</code>, and then computes <code>(1 - x) + (x / 2)</code> or <code>1 - x / 2</code>. We never need to refer to <code>x</code> anywhere in our program, but rather roughly write out "take the complement and add it to half", and the functions compose together - that is the beauty of tacit programming.</p>
       </div>
     </li>
-    <li class="active">
+    <li id="first-program">
       <div class="collapsible-header"><b>Your First Program</b></div>
       <div class="collapsible-body">
+        <span><a href="#first-program"><i class="material-icons">link</i></a></span><br />
         <p>Let's begin with a very simple program - Hello World. To get started, head over to the <a href="/tio">online Jelly executor</a> on this site or <a href="https://tio.run/#jelly">Try It Online!</a> (created by Dennis).</p>
         <p>In Jelly, strings begin with <code>“</code> and end with <code>”</code>. So, the most basic solution would be this:</p>
         <pre><code class="language-plaintext">“Hello, World!”</code></pre>
@@ -39,9 +43,10 @@
         <p>Don't worry if the exact algorithm doesn't make sense, and you definitely shouldn't try to learn how to compress strings yourself. The string compression tool allows you to do that easily.</p>
       </div>
     </li>
-    <li class="active">
+    <li id="jelly-syntax">
       <div class="collapsible-header"><b>Jelly Syntax</b></div>
       <div class="collapsible-body">
+        <span><a href="#jelly-syntax"><i class="material-icons">link</i></a></span><br />
         <p>Other than atoms and quicks, there are very few syntactical components in Jelly. Spaces can be used to separate tokens where necessary (for example, to have <code>1 2</code> as two literal numbers, rather than <code>12</code>). Numbers are represented with digits, decimal points, minus signs (note that subtraction uses <code>_</code> because <code>-</code> is reserved for numeric literals), <code>ı</code>, and <code>ȷ</code>. A regular number consists of an optional minus sign, followed by optional digits, followed by an optional decimal point, followed by optional digits (but must not be empty). If a minus sign is present with nothing after it, it represents <code>-1</code>. If a decimal point does not have digits to its left, it defaults to <code>0</code>, and the right side defaults to <code>5</code> (so <code>1.</code> is <code>1.5</code> and <code>.3</code> is <code>0.3</code>). (Exercise: what does <code>-.</code> evaluate to?)</p>
         <p>An exponential number literal is formed using <code>ȷ</code>, with optional regular number literals to its left and right. If the left is missing, it defaults to <code>1</code>, and if the right is missing, it defaults to <code>3</code>. <code>xȷy</code> evaluates to <code>x × 10 ^ y</code>. So, <code>4ȷ</code> evaluates to <code>4000</code>, <code>ȷ2</code> is 100, and <code>.ȷ.</code> is <code>1.5811388300841898</code>. A complex number literal is formed using <code>ı</code>, with optional regular or exponential number literals to its left and right. The left side is the real argument, defaulting to <code>0</code>, and the right side is the imaginary argument, defaulting to <code>1</code>. <code>2ı</code> evaluates to <code>2 + i</code>, <code>ı4</code> is <code>4i</code>, and <code>1ȷ2ı3ȷ4</code> is <code>100 + 30000i</code>.</p>
         <p>Regular string literals begin with <code>“</code>. When this is encountered, Jelly begins scanning a string literal. Encountering another <code>“</code> while parsing will convert it to a list of strings, where each section starting with <code>“</code> is an element. To terminate a normal string, use <code>”</code>. If the end of the file is encountered without seeing a string terminator, this is the default. This returns the string as-is, so <code>“Hello!”</code> (and <code>“Hello!</code> if nothing follows it) returns <code>"Hello!"</code>, and <code>“Hello“World”</code> returns <code>["Hello", "World"]</code> (which is printed by just outputting them back-to-back by Jelly - you can use <code>ŒṘ</code>, the Python's String Representation monad, to see what the internal representation is). Note that strings don't actually exist in Jelly, they are just lists of characters - you can read more about how this works <a href="/misc/jellystrings">here</a>.</p>
@@ -56,19 +61,22 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
         <p>Finally, <code>ø</code>, <code>µ</code>, <code>)</code>, <code>ð</code>, and <code>ɓ</code> are chain separators. We will explore those later, as they get quite complex.</p>
       </div>
     </li>
-    <li class="active">
+    <li id="vectorization">
       <div class="collapsible-header"><b>Vectorization</b></div>
       <div class="collapsible-body">
+        <span><a href="#vectorization"><i class="material-icons">link</i></a></span><br />
         <p>Before we continue on to Jelly-specific chaining rules and program structure, let's introduce vectorization, a common concept in array languages and golfing languages. Multiplying two lists together doesn't work in most languages (e.g. in Python, <code>[1, 2, 3] * [4, 5, 6]</code> will give an error). However, one behavior that would make sense is to multiply each corresponding pair of elements, so <code>[1, 2, 3] * [4, 5, 6]</code> could give <code>[4, 10, 18]</code>. Try the following online:</p>
         <pre><code>1,2,3 × 4,5,6</code></pre>
         <p>Many built-ins in Jelly vectorize. For example, <code>¬</code> (logical NOT) will vectorize down to each individual value, so <code>-,0,1 ¬</code> yields <code>[0, 1, 0]</code>, and <code>[1,0],[0,1] ¬</code> yields <code>[[0, 1], [1, 0]]</code>. Some monads will explicitly say that they do not vectorize; for example, <code>Ṇ</code> (logical NOT) is the non-vectorizing form and will yield <code>0</code> if given <code>[-1, 0, 1]</code> as an argument. Some built-ins will vectorize partially; for example, <code>U</code> (upend / reverse) reverses each list, so <code>1,2,3 U</code> yields <code>[3, 2, 1]</code> and <code>[1,2,3],[4,5,6] U</code> yields <code>[[3, 2, 1], [6, 5, 4]]</code>.</p>
         <p>Vectorization works relatively intuitively for dyads. If the left and right arguments are both single values, it just applies the function to the values. If one argument is a list and the other is a single value, it loops over the list side. For example, <code>1,2,3 + 4</code> gives <code>[5, 6, 7]</code> and <code>1 + 2,3,4</code> gives <code>[3, 4, 5]</code>. If both arguments are lists, then it applies to each corresponding pair. If one list is longer than the other, the trailing elements are included at the end unmodified (this behavior is different to Python's <code>zip</code>, which cuts off extra elements, and APL/J's vectorization, which errors if the axis lengths mismatch). For example, <code>4,5,6 × 2,3,4,5,6</code> gives <code>[8, 15, 24, 5, 6]</code>.</p>
         <p>Some dyads only vectorize on one side. For example, <code>ị</code> gets the element in the right argument using the left argument as an index, so if the left argument is a list, it will vectorize, but the right argument stays as a list. <code>2,1,4 ị 7,9,4,6,8,5</code> gives <code>[9, 7, 6]</code>, and <code>[5,2],[3,4] ị 7,9,4,6,8,5</code> gives <code>[[8, 9], [4, 6]]</code>. Vectorization will make more sense with examples, and many built-ins work with many unique vectorization methods.</p>
+        <p>When something is said to vectorize, it usually means to individual single elements. Vectorizing to depth 1 means that the built-in will process flat lists, and keep vectorizing down until it reaches depth 1 lists. Likewise, vectorizing to depth 2 means the built-in processes matrices.</p>
       </div>
     </li>
-    <li class="active">
+    <li id="nilad-monad-chains">
       <div class="collapsible-header"><b>Niladic / Monadic Chains</b></div>
       <div class="collapsible-body">
+        <span><a href="#nilad-monad-chains"><i class="material-icons">link</i></a></span><br />
         <p>The main link is run with its arity determined by the number of arguments. We will begin by exploring niladic and monadic chains together, as they work nearly identically. If a chain is run niladically, there are two possibilities. If it begins with a nilad, the remainder of the chain is evaluated monadically on that argument. Otherwise, the chain is evaluated monadically at zero. So, <code>13 + 4 H</code> is equivalent to <code>+ 4 H</code> evaluated with an argument of <code>13</code>, and <code>+ H _</code> is equivalent to the same link evaluated monadically on <code>0</code>.</p>
         <p>To evaluate a monadic chain, we have two starting situations. If the link begins with a nilad, it is popped off and becomes the <i>current value</i>. Otherwise, the current value begins as the chain's argument.</p>
         <p>Then, we can walk down the chain and match patterns of links as we go, slicing off each match, evaluating it, and setting the <i>current value</i> to the new value. We will represent nilads with digits, monads with uppercase letters, and dyads with mathematical operators, such as <code>+ × ÷</code>. The left argument will be referred to as <code>ω</code>, and the current value will be <code>λ</code>. For monadic chains, these are the patterns (the first one matched is applied):</p>
@@ -109,15 +117,17 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
         <p>If a nilad is encountered that isn't part of a dyad-nilad or nilad-dyad pair, it causes the current <code>λ</code> value to be output (with no trailing newline) and <code>λ</code> then becomes the value of that nilad. This is known as smash-printing - essentially, the chain's current value is forced to a new value and the old value is outputted and discarded.</p>
       </div>
     </li>
-    <li class="active">
+    <li id="leading-constant-chains">
       <div class="collapsible-header"><b>Leading Constant Chains (LCC)</b></div>
       <div class="collapsible-body">
+        <span><a href="#leading-constant-chains"><i class="material-icons">link</i></a></span><br />
         <p>There is a special type of chain known as a "Leading Constant Chain". As the name describes, it is a chain with a leading constant (or any nilad, it doesn't actually have to be a constant nilad). The formal definition of an LCC is chain whose first link is a nilad and whose subsequent links are either monads, dyad-nilad pairs, or nilad-dyad pairs. Essentially, its link arities should match the pattern <code>0(1|20|02)*</code>. Since they begin with a nilad and then only contain monadic-like components, they don't apply a function to anything else and are self-contained, so parsing them into one chain would result in essentially a nilad. Thus, some things interact differently when LCCs are present.</p>
       </div>
     </li>
-    <li class="active">
+    <li id="dyad-chains">
       <div class="collapsible-header"><b>Dyadic Chains</b></div>
       <div class="collapsible-body">
+        <span><a href="#dyad-chains"><i class="material-icons">link</i></a></span><br />
         <p>Dyadic chains have two arguments (we will call them <code>α</code> (left) and <code>ω</code> (right)), and we evaluate them similarly with a <i>current value</i> of <code>λ</code>. There are a few more rules for determining what the starting value is:</p>
         <ul class="larger-text">
           <li>if the chain starts with three dyads, e.g. <code>+ × ÷</code>, then the initial value is <code>λ = α + ω</code>, and we consider the rest of the chain, <code>× ÷ ...</code></li>
@@ -168,9 +178,10 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
         <p>Like with niladic / monadic chains, if a nilad is encountered that is not part of one of these rules, it smash-prints the current value of <code>λ</code> and sets <code>λ</code> to the new nilad's value.</p>
       </div>
     </li>
-    <li class="active">
+    <li id="chain-separators">
       <div class="collapsible-header"><b>Multi-Chain Links (Chain Separators)</b></div>
       <div class="collapsible-body">
+        <span><a href="#chain-separators"><i class="material-icons">link</i></a></span><br />
         <p>A link (the outer link, not each individual unit) is not actually a single chain that consists of a bunch of links (the unit type) that chain together according to the rules. Each link is actually a chain of chains; however, the outer chain usually has unit length (only contains one sub-chain). Recall the chain separators from earler, <code>ø</code>, <code>µ</code>, <code>)</code>, <code>ð</code>, and <code>ɓ</code>. The first chain (and often the only one) is <i>variadic</i> by default, meaning that its arity is based on context. By default, this means that the first chain has the arity of the link itself, which means that if no chain separators are present, it behaves quite normally - a dyadic link will evaluate its chain dyadically, a monadic link will evaluate its chain monadically, etc. These chain separators start a new chain. You cannot nest chain separators - they don't act as sub-functions, but rather separate a link into multiple chains. If there are links before the first chain separator, it becomes a variadic chain; otherwise, it just gets removed (so <code>1µ2</code> is a variadic chain followed by a monadic chain, whereas <code>µ2</code> is just one monadic chain). Let's look at what each separator means:</p>
         <ul class="larger-text">
           <li><code>ø</code> starts a new niladic chain</li>
@@ -183,13 +194,18 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
         <p>Chaining rules apply to both how the outer chains are grouped together and how the links within each sub-chain are grouped. For example, <code>ð,µ,</code> gives <code>[1, [1, 1]]</code> when run monadically (with an argument of <code>1</code>) because of the 2,1-chain rule, but gives <code>[[1, 2], [1, 2]]</code> when run dyadically (with arguments <code>1</code> and <code>2</code>) because the 2,1-chain rule does not apply to dyadic chains and instead just applies <code>ð,</code> to the arguments, followed by <code>µ,</code> to the results.</p>
       </div>
     </li>
-    <li class="active">
+    <li id="further-resources">
       <div class="collapsible-header"><b>Further Resources</b></div>
       <div class="collapsible-body">
+        <span><a href="#further-resources"><i class="material-icons">link</i></a></span><br />
         <p>Congratulations! You've reached the end of the beginners' tutorial page. Hopefully, you should have a decent idea of what to expect going forward and the fundamentals of Jelly's structure and functionality. At this point, practice and experience is the best teacher - you can only learn so much by reading. There are exercises available on the <a href="https://golfingsuccess.github.io/jelly-hypertraining/">official JHT website</a> as well as practice problems for you to solve <a href="/practice">here</a>. You can also try your hand at solving harder problems on <a href="https://codegolf.stackexchange.com/">Code Golf Stack Exchange</a>.</p>
         <p>If you have any questions, feel free to ask in <a href="https://chat.stackexchange.com/transcript/57815/jelly-hypertraining">Jelly Hypertaining</a> - you'll need explicit write access to the chat room, so request access and explain that you're interested in learning Jelly or have a specific question if anyone asks why you want access.</p>
       </div>
     </li>
   </ul>
   <br /><br />
+{% endblock %}
+
+{% block tail %}
+  <script src="/static/multi-collapse.js"></script>
 {% endblock %}
