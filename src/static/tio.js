@@ -94,7 +94,7 @@ $(document).ready(function() {
 });
 
 function update_byte_count(element) {
-  var label = element.parentNode.parentNode.parentNode.children[0].children[0];
+  var label = element.parentNode.parentNode.parentNode.children[0].children[1];
   var bytes = element.value.length;
   label.innerHTML = label.innerHTML.replace(/\d+ bytes?/, bytes + " byte" + "s".repeat(bytes != 1));
 }

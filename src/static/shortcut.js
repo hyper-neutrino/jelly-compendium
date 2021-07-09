@@ -193,6 +193,7 @@ $(document).ready(function() {
       if (mx.length) {
         elem.value = elem.value.substring(0, pos - mx.length) + shortcuts[mx] + elem.value.substring(pos);
         elem.selectionStart = elem.selectionEnd = pos - mx.length + shortcuts[mx].length;
+        update_byte_count(elem);
       }
     }
   });
