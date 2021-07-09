@@ -10,7 +10,7 @@
         <p>A couple of terms and conventions are important to establish and will be used throughout much of this page and this entire website:</p>
         <ul class="larger-text">
           <li><b>Arity</b> refers to the number of arguments that a function takes. A <em>niladic</em> function (nilad) takes zero (0) arguments, a <em>monadic</em> function (monad) takes one (1) argument, and a <em>dyadic</em> function (dyad) takes two (2) arguments.</li>
-          <li><b>Atoms</b> are Jelly's name for functions. These take values as arguments and produce values.</li>
+          <li><b>Atoms</b> are Jelly's name for functions. These take values as arguments and produce values. Note that every atom in Jelly has <i>fixed arity</i>, meaning that the number of arguments it takes does not change depending on context. Quicks can produce links with different arities than the base link, but the atom itself has fixed arity.</li>
           <li><b>Quicks</b> are Jelly's name for operators / meta-functions. These consume some number of links that come before them and modify them or produce some other link.</li>
           <li><b>Links</b> are lines of code in Jelly, similar to how one can define multiple functions in one file. The last link (separated by newlines or <code>¶</code>) is the "main link" and is executed when the program is run.</li>
           <li><b>Links</b> also refer to any single function, whether it is an atom or the result of composing multiple atoms together with (a) quick(s). This terminology is a bit confusing, but it is the official naming scheme.</li>
