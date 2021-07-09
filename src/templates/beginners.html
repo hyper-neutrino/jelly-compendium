@@ -15,8 +15,8 @@
           <li><b>Links</b> are lines of code in Jelly, similar to how one can define multiple functions in one file. The last link (separated by newlines or <code>¶</code>) is the "main link" and is executed when the program is run.</li>
           <li><b>Links</b> also refer to any single function, whether it is an atom or the result of composing multiple atoms together with (a) quick(s). This terminology is a bit confusing, but it is the official naming scheme.</li>
           <li><b>Chains</b> are groups of links written side-by-side. The functionality of chains depends on its arity and the chaining rules, which will be explored later.</li>
-          <li>Nilads will be represented by digits, monads by capital letters, and dyads by mathematical operators.</li>
         </ul>
+        <p>Throughout this section, we will represent nilads with digits, monads with uppercase letters, and dyads with mathematical operators, such as <code>+ × ÷</code>.</p>
       </div>
     </li>
     <li class="active">
@@ -71,7 +71,7 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
       <div class="collapsible-body">
         <p>The main link is run with its arity determined by the number of arguments. We will begin by exploring niladic and monadic chains together, as they work nearly identically. If a chain is run niladically, there are two possibilities. If it begins with a nilad, the remainder of the chain is evaluated monadically on that argument. Otherwise, the chain is evaluated monadically at zero. So, <code>13 + 4 H</code> is equivalent to <code>+ 4 H</code> evaluated with an argument of <code>13</code>, and <code>+ H _</code> is equivalent to the same link evaluated monadically on <code>0</code>.</p>
         <p>To evaluate a monadic chain, we have two starting situations. If the link begins with a nilad, it is popped off and becomes the <i>current value</i>. Otherwise, the current value begins as the chain's argument.</p>
-        <p>Then, we can walk down the chain and match patterns of links as we go, slicing off each match, evaluating it, and setting the <i>current value</i> to the new value. Refer to the terms and conventions for how each arity is represented. The left argument will be referred to as <code>ω</code>, and the current value will be <code>λ</code>. For monadic chains, these are the patterns (the first one matched is applied):</p>
+        <p>Then, we can walk down the chain and match patterns of links as we go, slicing off each match, evaluating it, and setting the <i>current value</i> to the new value. We will represent nilads with digits, monads with uppercase letters, and dyads with mathematical operators, such as <code>+ × ÷</code>. The left argument will be referred to as <code>ω</code>, and the current value will be <code>λ</code>. For monadic chains, these are the patterns (the first one matched is applied):</p>
         <center>
           <table class="chaining-rules">
             <tr>
@@ -118,7 +118,7 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
           <li>if the chain is an LCC starting with some constant (nilad) <code>κ</code> (i.e. <code>κ F 1+ +1 ...</code>), then the initial value is <code>λ = κ</code>, and we consider the rest of the chain</li>
           <li>otherwise, <code>λ = α</code>, and we consider the whole chain</li>
         </ul>
-        <p>The patterns are different for dyadic chains:</p>
+        <p>The patterns are different for dyadic chains. Again, we will represent nilads with digits, monads with uppercase letters, and dyads with mathematical operators, such as <code>+ × ÷</code>.</p>
         <center>
           <table class="chaining-rules">
             <tr>
