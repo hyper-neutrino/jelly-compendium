@@ -120,7 +120,7 @@ main ul:not(.browser-default):not(.collapsible) li {
   padding-left: 0.5em;
 }
 
-ul.larger-text {
+.larger-text {
   font-size: 110%;
 }
 

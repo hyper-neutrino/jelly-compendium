@@ -445,7 +445,7 @@
     "name": "Bitwise NOT",
     "arity": 1,
     "keywords": ["bitwise", "not", "inverted", "inverse"],
-    "tags": ["bitwise", "math", "number", "vectorized"],
+    "tags": ["bitwise", "math", "number", "vectorize"],
     "tagline": "Compute the bitwise inverse of a number.",
     "description": "For integers, equivalent to <code>-1 - z</code>. Floating numbers get truncated. Complex numbers and single characters give <code>0</code>.",
     "synonyms": []
@@ -874,7 +874,7 @@
     "name": "Shuffle",
     "arity": 1,
     "keywords": ["shuffle", "randomly", "permute", "permutation", "reordering"],
-    "tags": ["array", "combinatorics"],
+    "tags": ["array", "random", "combinatorics"],
     "tagline": "Return a random permutation of a list.",
     "description": "Numbers are automatically cast to a range.",
     "synonyms": ["Œ!X$"]
@@ -906,7 +906,7 @@
     "id": "vectorizing-sum",
     "name": "Vectorizing Sum",
     "arity": 1,
-    "keywords": ["vectorizing", "vectorized", "sum", "each", "addition", "reduce"],
+    "keywords": ["vectorizing", "vectorize", "sum", "each", "addition", "reduce"],
     "tags": ["math", "number", "array", "vectorize"],
     "tagline": "Sum; vectorizes at depth 1.",
     "description": "For backwards compatibility, <code>ụ</code> works as well. Both are code point 225.",
@@ -917,7 +917,7 @@
     "id": "cumulative-sum",
     "name": "Cumulative Sum",
     "arity": 1,
-    "keywords": ["vectorizing", "vectorized", "cumulative", "sum", "scan", "addition", "reduce"],
+    "keywords": ["vectorizing", "vectorize", "cumulative", "sum", "scan", "addition", "reduce"],
     "tags": ["math", "number", "array", "vectorize"],
     "tagline": "Cumulative sum; vectorizes at depth 1.",
     "description": "For backwards compatibility, <code>ṿ</code> works as well, Both are code point 226.",
@@ -1259,7 +1259,7 @@
     "name": "Inclusive Range",
     "arity": 2,
     "keywords": ["inclusive", "range"],
-    "tags": ["array", "numbers", "vectorize"],
+    "tags": ["array", "number", "vectorize"],
     "tagline": "Return the inclusive range from <code>x</code> to <code>y</code>, descending if <code>x &gt; y</code>.",
     "description": "",
     "synonyms": []
@@ -1270,7 +1270,7 @@
     "name": "Split (Length)",
     "arity": 2,
     "keywords": ["split", "into", "slices", "length"],
-    "tags": ["array", "numbers", "vectorize"],
+    "tags": ["array", "number", "vectorize"],
     "tagline": "Return <code>x</code> sliced into chunks of length <code>y</code>.",
     "description": "Vectorizes over the right argument. If the length of <code>x</code> is not divisible by <code>y</code>, the last chunk will be shorter. Numbers are automatically cast to a range on the left. For example, <code>5 s 2</code> returns <code>[[1, 2], [3, 4], [5]]</code>.",
     "synonyms": []
@@ -1622,7 +1622,7 @@
     "name": "Split (Length, Overlapping)",
     "arity": 2,
     "keywords": ["split", "into", "slices", "length", "overlapping"],
-    "tags": ["array", "numbers", "vectorize"],
+    "tags": ["array", "number", "vectorize"],
     "tagline": "Return overlapping slices of <code>x</code> of length <code>y</code>.",
     "description": "Vectorizes over the right argument. If the length of <code>x</code> is less than <code>y</code>, returns the empty list. Numbers are automatically cast to a range on the left. For example, <code>5 ṡ 3</code> returns <code>[[1, 2, 3], [2, 3, 4], [3, 4, 5]]</code>.",
     "synonyms": []

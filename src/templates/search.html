@@ -32,6 +32,15 @@
               Filter by tag
               <br />
               <br />
+              <div class="switch">
+                <label>
+                  <span class="larger-text">union</span>
+                  <input id="switch" type="checkbox" />
+                  <span class="lever"></span>
+                  <span class="larger-text">intersection</span>
+                </label>
+              </div>
+              <br />
               <table class="search-option-table">
                 {% for row in range(0, tags | length, 6) %}
                   <tr>

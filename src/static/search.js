@@ -77,6 +77,10 @@ function update_search() {
   var do_major_types = include.indexOf("atoms") != -1 || include.indexOf("quicks") != -1 || include.indexOf("syntax") != -1;
   var do_minor_types = include.indexOf("nilads") != -1 || include.indexOf("monads") != -1 || include.indexOf("dyads") != -1;
 
+  if (do_minor_types && !do_major_types) {
+    include.push("atoms");
+  }
+
   var keywords = query.split(/\W+/).map(function(x) {
     return x.toLowerCase();
   }).filter(function(x) {
@@ -94,18 +98,19 @@ function update_search() {
     if (index == 0) return;
     var tagged = false;
     var kws = [];
+    var taglist = [];
     for (var property of element.classList) {
       if (property.startsWith("type-")) {
         var type = property.substring(5);
         if (type == "atoms" || type == "quicks" || type == "syntax") {
-          if (do_major_types) {
+          if (do_minor_types || do_major_types) {
             if (include.indexOf(type) == -1) {
               element.hidden = true;
               return;
             }
           }
         } else {
-          if (do_major_types && do_minor_types) {
+          if (do_minor_types) {
             if (include.indexOf(type) == -1) {
               element.hidden = true;
               return;
@@ -117,6 +122,7 @@ function update_search() {
         if (tags.length == 0 || tags.indexOf(tag) != -1) {
           tagged = true;
         }
+        taglist.push(tag);
       } else if (property.startsWith("keyword-")) {
         var keyword = property.substring(8);
         kws.push(keyword);
@@ -141,6 +147,14 @@ function update_search() {
       if (!found) {
         element.hidden = true;
         return;
+      }
+    }
+    if (document.getElementById("switch").checked) {
+      for (var tag of tags) {
+        if (taglist.indexOf(tag) == -1) {
+          element.hidden = true;
+          return;
+        }
       }
     }
     element.hidden = !tagged;

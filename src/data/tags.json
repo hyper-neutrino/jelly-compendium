@@ -1,6 +1,7 @@
 {
   "arguments": "Built-ins that relate to link/chain arguments or command line arguments to the program.",
   "array": "Built-ins that create, process, or manipulate arrays / lists of values.",
+  "bitwise": "Built-ins that manipulate the bits (binary representation) of its argument(s).",
   "boolean": "Built-ins that process or manipulate boolean values, or are logical operators (as opposed to bitwise). In Jelly, booleans are represented as <code>0</code> and <code>1</code>.",
   "combinatorics": "The broad mathematical field of counting in relation to finite structures. As an unexhaustive list, enumeration, determining existence, and construction of structures satisfying some condition are part of combinatorics.",
   "constant": "Nilads that always return the same value.",
