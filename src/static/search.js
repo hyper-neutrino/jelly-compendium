@@ -88,7 +88,7 @@ function update_search() {
       "a", "as", "an", "and",
       "o", "or", "of",
       "t", "to", "th", "the",
-      "i", "in", "is",
+      "i", "in", "is", "s",
       "f", "fr", "fro", "from",
       "fo", "for"
     ].indexOf(x) == -1;

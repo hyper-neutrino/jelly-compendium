@@ -81,7 +81,7 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
         <p>To evaluate a monadic chain, we have two starting situations. If the link begins with a nilad, it is popped off and becomes the <i>current value</i>. Otherwise, the current value begins as the chain's argument.</p>
         <p>Then, we can walk down the chain and match patterns of links as we go, slicing off each match, evaluating it, and setting the <i>current value</i> to the new value. We will represent nilads with digits, monads with uppercase letters, and dyads with mathematical operators, such as <code>+ × ÷</code>. The left argument will be referred to as <code>ω</code>, and the current value will be <code>λ</code>. For monadic chains, these are the patterns (the first one matched is applied):</p>
         <center>
-          <table class="chaining-rules">
+          <table class="halfwidth">
             <tr>
               <th>Pattern</th>
               <th>New <code>λ</code> value</th>
@@ -136,7 +136,7 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
         </ul>
         <p>The patterns are different for dyadic chains. Again, we will represent nilads with digits, monads with uppercase letters, and dyads with mathematical operators, such as <code>+ × ÷</code>.</p>
         <center>
-          <table class="chaining-rules">
+          <table class="halfwidth">
             <tr>
               <th>Pattern</th>
               <th>New <code>λ</code> value</th>
