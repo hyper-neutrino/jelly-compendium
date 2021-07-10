@@ -258,6 +258,14 @@ function cmc() {
   scroll();
 }
 
+function get_md5() {
+  document.location = url();
+  var code = $("#code").val().replace("\n", "¶");
+  $("#stdout").val(md5(code)).select().focus();
+  updateAll();
+  scroll();
+}
+
 function tio() {
   alert("This feature is not implemented yet!");
 }

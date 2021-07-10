@@ -11,6 +11,7 @@
   "math": "A broad categpry for built-ins that do something somewhat math-related.",
   "matrix": "Built-ins that create, process, or manipulate 2D array / lists of values (they do not have to be rectangular).",
   "miscellaneous": "Digraph monads beginning with <code>Œ</code> and dyads beginning with <code>œ</code> that perform some uncategorized operation",
+  "nth-link": "Niladic quicks that refer to another link (or itself) (sort of like calling function references).",
   "number": "Built-ins that primarily manipulate numeric values (not including built-ins that require a number but primarily manipulate other data; for example, array indexing).",
   "optimization": "Built-ins that relate to finding an extreme value or structure by some condition with some metric / criterion; for example, the maximum element, or the element with the most prime factors.",
   "prime": "Built-ins that find primes or determine primality. An integer is prime if and only if it has exactly two factors (<code>1</code> and itself - so <code>1</code> is not a prime).",

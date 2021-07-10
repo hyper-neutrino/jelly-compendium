@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block head %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js" integrity="sha512-Hmp6qDy9imQmd15Ds1WQJ3uoyGCUz5myyr5ijainC1z+tP7wuXcze5ZZR3dF7+rkRALfNy7jcfgS5hH8wJ/2dQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     window.onbeforeunload = function() {
       return true;
@@ -14,6 +15,7 @@
   <button class="waves-effect light-blue btn" onclick="link()">LINK</button>
   <button class="waves-effect light-blue btn" onclick="format()">Format for SE</button>
   <button class="waves-effect light-blue btn" onclick="cmc()">Format for CMC</button>
+  <button class="waves-effect light-blue btn" onclick="get_md5()">MD5</button>
   <button class="waves-effect light-blue btn" onclick="tio()">Generate corresponding TIO link</button>
   <a href="/explain" target="_blank" id="explainlink" class="waves-effect green btn">Explain this code</a>
   <br />

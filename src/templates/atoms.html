@@ -2,8 +2,8 @@
 
 {% block content %}
   <h3>Atom - <code>{{ data["symbol"] }}</code> - {{ data["name"] | safe }}</h3>
-  <p>Characters:&nbsp;{% for char in data["symbol"] %} {% if loop.index != 1 %},&nbsp;{% endif %} {{ char | charlink }} {% endfor %}</p>
-  <p>Tags:&nbsp;{% for tag in data["tags"] %} {% if loop.index != 1 %},&nbsp;{% endif %} {{ tag | taglink }} {% endfor %}</p>
+  <p>Characters: {% for char in data["symbol"] %} {% if loop.index != 1 %}, {% endif %} {{ char | charlink }} {% endfor %}</p>
+  <p>Tags: {% for tag in data["tags"] %} {% if loop.index != 1 %}, {% endif %} {{ tag | taglink }} {% endfor %}</p>
   <h5>Arity: {{ ["niladic", "monadic", "dyadic"][data["arity"]] }}</h5>
   <p>
     {% if data["arity"] == 0 %}
@@ -31,4 +31,5 @@
       {% endfor %}
     </ul>
   {% endif %}
+  <br /><br />
 {% endblock %}

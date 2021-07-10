@@ -97,6 +97,7 @@ function update_search() {
   $("table#search-results tr").each(function(index, element) {
     if (index == 0) return;
     var tagged = false;
+    var notags = true;
     var kws = [];
     var taglist = [];
     for (var property of element.classList) {
@@ -123,6 +124,7 @@ function update_search() {
           tagged = true;
         }
         taglist.push(tag);
+        notags = false;
       } else if (property.startsWith("keyword-")) {
         var keyword = property.substring(8);
         kws.push(keyword);
@@ -157,6 +159,6 @@ function update_search() {
         }
       }
     }
-    element.hidden = !tagged;
+    element.hidden = !(tagged || notags);
   });
 }

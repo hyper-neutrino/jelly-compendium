@@ -291,7 +291,7 @@
     "name": "Indices of Maximal Elements",
     "arity": 1,
     "keywords": ["indexes", "indices", "maximal", "maximum", "elements"],
-    "tags": ["array", "optimization"],
+    "tags": ["array", "number", "optimization"],
     "tagline": "Find the indices of elements that are maximal in a list.",
     "description": "This atom will error on single values rather than automatically casting to range or singleton.",
     "synonyms": ["ẹṀ$"]

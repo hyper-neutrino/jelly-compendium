@@ -8,7 +8,7 @@
       <h5>{{ category }}</h5>
       <ul class="larger-text">
         {% for item in data[key] %}
-          <li><a href="/{{ key }}/{{ item['id'] }}"><code>{{ item["symbol"] }}</code> - {{ item["name"] }}</a></li>
+          <li><a href="/{{ key }}/{{ item['id'] }}"><code>{{ item["symbol"] }}</code> - {{ item["name"] | safe }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
