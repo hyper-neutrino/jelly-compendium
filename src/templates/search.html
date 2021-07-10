@@ -68,7 +68,7 @@
         <th>Name</th>
         <th>Type</th>
         <th>Arity</th>
-        <th>Description</th>
+        <th>Description (For monads, <code>z</code> is the argument; for dyads, <code>x</code> and <code>y</code> are the left and right arguments).</th>
       </tr>
       {% for item in data %}
         <tr class="type-{{ item['type'] }}
@@ -80,6 +80,9 @@
           {% endfor %}
           {% for keyword in item['keywords'] %}
             keyword-{{ keyword }}
+          {% endfor %}
+          {% for antiword in item['antiwords'] %}
+            antiword-{{ antiword }}
           {% endfor %}
         ">
           <td><a href="/{{ item['type'] }}/{{ item['id'] }}" target="_blank"><code>{{ item["symbol"] }}</code></a></td>

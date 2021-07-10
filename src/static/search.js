@@ -80,7 +80,14 @@ function update_search() {
   var keywords = query.split(/\W+/).map(function(x) {
     return x.toLowerCase();
   }).filter(function(x) {
-    return x.length && ["and", "or", "of", "the", "in", "from", "to", "for", "as", "a"].indexOf(x) == -1;
+    return x.length && [
+      "a", "as", "an", "and",
+      "o", "or", "of",
+      "t", "to", "th", "the",
+      "i", "in",
+      "f", "fr", "fro", "from",
+      "fo", "for"
+    ].indexOf(x) == -1;
   });
 
   $("table#search-results tr").each(function(index, element) {
@@ -113,6 +120,14 @@ function update_search() {
       } else if (property.startsWith("keyword-")) {
         var keyword = property.substring(8);
         kws.push(keyword);
+      } else if (property.startsWith("antiword-")) {
+        var antiword = property.substring(9);
+        for (var keyword of keywords.slice(0, query.endsWith(" ") ? keywords.length : keywords.length - 1)) {
+          if (keyword == antiword) {
+            element.hidden = true;
+            return;
+          }
+        }
       }
     }
     for (var keyword of keywords) {
