@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <h3>Quick - <code>{{ data["symbol"] }}</code> - {{ data["name"] }}</h3>
+  <h3>Quick - <code>{{ data["symbol"] }}</code> - {{ data["name"] | safe }}</h3>
   <p>Characters:&nbsp;{% for char in data["symbol"] %} {% if loop.index != 1 %},&nbsp;{% endif %} {{ char | charlink }} {% endfor %}</p>
   <p>Tags:&nbsp;{% for tag in data["tags"] %} {% if loop.index != 1 %},&nbsp;{% endif %} {{ tag | taglink }} {% endfor %} {% if data["tags"] == [] %} (none) {% endif %}</p>
   <h5>Links Required:&nbsp;{% if data["arity"] == None %} Variable {% else %} {{ data["arity"] }} {% endif %}</h5>

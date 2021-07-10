@@ -265,5 +265,5 @@ function tio() {
 function update_explain_link() {
   var code = get_code();
   var arity = Math.min(2, $(".argument").length);
-  document.getElementById("explainlink").href = "/misc/explain?code=" + encodeURIComponent(escape(code)) + "&arity=" + arity;
+  document.getElementById("explainlink").href = "/explain?code=" + encodeURIComponent(escape(code)) + "&arity=" + arity;
 }

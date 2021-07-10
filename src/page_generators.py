@@ -29,7 +29,10 @@ for key in ["atoms", "quicks", "syntax"]:
     with open(f"src/data/{key}.json", "r") as f:
         category = json.load(f)
         for item in category:
+            if item["id"] == "":
+                continue
             if key != "misc":
+                assert item["id"] not in data[key], f"duplicate ID '{item['id']}' for type '{key}'"
                 data[key][item["id"]] = item
             for char in item["symbol"]:
                 charmap[char][key].append(item)

@@ -76,7 +76,7 @@
         <th>Symbol</th>
         <th>Name</th>
         <th>Type</th>
-        <th>Arity</th>
+        <th style="width:10%">Arity</th>
         <th>Description (For monads, <code>z</code> is the argument; for dyads, <code>x</code> and <code>y</code> are the left and right arguments).</th>
       </tr>
       {% for item in data %}
@@ -95,7 +95,7 @@
           {% endfor %}
         ">
           <td><a href="/{{ item['type'] }}/{{ item['id'] }}" target="_blank"><code>{{ item["symbol"] }}</code></a></td>
-          <td><a href="/{{ item['type'] }}/{{ item['id'] }}" target="_blank">{{ item["name"] }}</a></td>
+          <td><a href="/{{ item['type'] }}/{{ item['id'] }}" target="_blank">{{ item["name"] | safe }}</a></td>
           {% if item["type"] == "atoms" %}
             <td><a href="/beginners#terminology" target="_blank">Atom</a></td>
             <td>{{ ["niladic", "monadic", "dyadic"][item["arity"]] }} ({{ item["arity"] }})</td>
