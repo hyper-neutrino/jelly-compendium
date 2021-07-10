@@ -260,7 +260,7 @@
     "keywords": ["range", "length", "index", "indices"],
     "tags": ["array", "number"],
     "tagline": "Given a list <code>z</code>, produce <code>[1, 2, ..., len(z)]</code>.",
-    "description": "This atom can also be thought of as \"get the indices to access this list\". If the argument is a single value, this returns <code>[1]</code>. <a href='/multidimensional-indices'><code>ŒJ</code> (Multidimensional Indices)</a> is the multidimensional variant.",
+    "description": "This atom can also be thought of as \"get the indices to access this list\". If the argument is a single value, this returns <code>[1]</code>.",
     "synonyms": ["LR$"]
   },
   {
@@ -293,7 +293,7 @@
     "keywords": ["indexes", "indices", "maximal", "maximum", "elements"],
     "tags": ["array", "optimization"],
     "tagline": "Find the indices of elements that are maximal in a list.",
-    "description": "This atom will error on single values rather than automatically casting to range or singleton. <a href='/multidimensional-indices-of-max'><code>ŒM</code> (Multidimensional Indices of Maximal Elements)</a> is the multidimensional variant.",
+    "description": "This atom will error on single values rather than automatically casting to range or singleton.",
     "synonyms": ["ẹṀ$"]
   },
   {
@@ -370,7 +370,7 @@
     "keywords": ["indices", "indexes", "truthy", "true", "values", "mask", "boolean"],
     "tags": ["array", "boolean"],
     "tagline": "Return the indices of truthy values in a list.",
-    "description": "Errors if given a single number; however, since characters are iterable (because they are single-character Python strings internally), they will just return <code>[1]</code>. <a href='/multidimensional-truthy-indices'><code>ŒṪ</code> (Multidimensional Truthy Indices)</a> is the multidimensional variant.",
+    "description": "Errors if given a single number; however, since characters are iterable (because they are single-character Python strings internally), they will just return <code>[1]</code>.",
     "synonyms": []
   },
   {
@@ -634,7 +634,7 @@
     "keywords": ["truthy", "ones", "indices", "indexes", "list", "array", "with", "values"],
     "tags": ["array", "number", "vectorize"],
     "tagline": "Return a boolean array with <code>1</code>s at the indices in the argument and <code>0</code>s elsewhere. Vectorizes at depth 1.",
-    "description": "This is the right inverse of <a href='/atoms/truthy-indices'>Indices of Truthy Values (<code>T</code>)</a>. <a href='/multidimensional-ones-at-indices'><code>ŒṬ</code> (Multidimensional Ones at Indices)</a> is the multidimensional variant.",
+    "description": "This is the right inverse of <a href='/atoms/truthy-indices'>Indices of Truthy Values (<code>T</code>)</a>.",
     "synonyms": []
   },
   {
@@ -743,7 +743,7 @@
     "arity": 1,
     "keywords": ["enumerate", "index", "each"],
     "tags": ["array"],
-    "tagline": "Enumerate an array (<code>[[1, z[1]], [2, z[2]], ...]</code>). <a href='/multidimensional-enumerate'><code>ŒĖ</code> (Multidimensional Enumerate)</a> is the multidimensional variant.",
+    "tagline": "Enumerate an array (<code>[[1, z[1]], [2, z[2]], ...]</code>).",
     "description": "",
     "synonyms": []
   },
@@ -766,7 +766,7 @@
     "keywords": ["group", "indices", "corresponding", "values"],
     "tags": ["array"],
     "tagline": "Group the indices of a list by the corresponding values.",
-    "description": "This returns a list of lists. Each number in <code>[1, 2, ..., len(z)]</code> will appear exactly once. Each sub-list will contain indices that map to the same value; that is, <code>i</code> and <code>j</code> are in the same sublist if and only if <code>z[i] == z[j]</code>. The sublists are ordered by the element they correspond to. <a href='/group-multidimensional-indices'><code>ŒĠ</code> (Group Multidimensional Indices)</a> is the multidimensional variant.",
+    "description": "This returns a list of lists. Each number in <code>[1, 2, ..., len(z)]</code> will appear exactly once. Each sub-list will contain indices that map to the same value; that is, <code>i</code> and <code>j</code> are in the same sublist if and only if <code>z[i] == z[j]</code>. The sublists are ordered by the element they correspond to.",
     "synonyms": []
   },
   {
@@ -1498,7 +1498,7 @@
   {
     "symbol": "ṣ",
     "id": "split-at-occurrences",
-    "name": "Split At occurrences",
+    "name": "Split At Occurrences",
     "arity": 2,
     "keywords": ["split", "list", "instances", "occurrences", "elements"],
     "tags": ["array"],
@@ -2993,7 +2993,7 @@
     "arity": 1,
     "keywords": ["multidimensional", "enumerate"],
     "tags": ["miscellaneous", "array", "number"],
-    "tagline": "At depth 0, each element has its multidimensional index prepended (the multidimensional index is a list containing the sequential indices to access an element). <a href='/atoms/enumerate'><code>Ė</code> (Enumerate)</a> is the one-dimensional version.",
+    "tagline": "At depth 0, each element has its multidimensional index prepended (the multidimensional index is a list containing the sequential indices to access an element).",
     "description": "",
     "synonyms": []
   },
@@ -3016,7 +3016,7 @@
     "keywords": ["group", "multidimensional", "indices", "indexes", "by", "value"],
     "tags": ["miscellaneous", "array", "number"],
     "tagline": "Group the multidimensional indices of a list by the corresponding values.",
-    "description": "This returns a list of lists. Each multidimensional index of <code>z</code> will appear exactly once. Two indices are in the same sublist if and only if their corresponding values are equal. The sublists are ordered by the element they correspond to. <a href='/atoms/group-indices'><code>Ġ</code> (Group Indices by Value)</a> is the one-dimensional version.",
+    "description": "This returns a list of lists. Each multidimensional index of <code>z</code> will appear exactly once. Two indices are in the same sublist if and only if their corresponding values are equal. The sublists are ordered by the element they correspond to.",
     "synonyms": []
   },
   {
@@ -3037,7 +3037,7 @@
     "arity": 1,
     "keywords": ["multidimensional", "indices", "indexes"],
     "tags": ["miscellaneous", "array", "number"],
-    "tagline": "Return the list of multidimensional indices of <code>z</code> in order of depth-first traversal. <a href='/atoms/range-of-length'><code>J</code> (Range of Length)</a> is the one-dimensional version.",
+    "tagline": "Return the list of multidimensional indices of <code>z</code> in order of depth-first traversal.",
     "description": "",
     "synonyms": []
   },
@@ -3138,7 +3138,7 @@
     "keywords": ["miscellaneous", "multidimensional", "indexes", "indices", "maximal", "maximum", "elements"],
     "tags": ["array", "optimization", "number"],
     "tagline": "Find the multidimensional indices of elements that are maximal in a list.",
-    "description": "This atom will error on single values rather than automatically casting to range or singleton. <a href='/atoms/indices-of-max'><code>M</code> (Indices of Maximal Elements)</a> is the one-dimensional version.",
+    "description": "This atom will error on single values rather than automatically casting to range or singleton.",
     "synonyms": []
   },
   {
@@ -3245,8 +3245,8 @@
     "id": "integer-partitions",
     "name": "Integer Partitions",
     "arity": 1,
-    "keywords": ["integer", "partitions", "vectorize"],
-    "tags": ["miscellaneous", "math", "array", "number", "combinatorics"],
+    "keywords": ["integer", "partitions"],
+    "tags": ["miscellaneous", "math", "array", "number", "combinatorics", "vectorize"],
     "tagline": "Integer partitions; all non-decreasing lists of positive integers that sum to <code>z</code>.",
     "description": "",
     "synonyms": []
@@ -3325,7 +3325,7 @@
     "keywords": ["multidimensional", "indices", "indexes", "truthy", "true", "values", "mask", "boolean"],
     "tags": ["array", "boolean"],
     "tagline": "Return the multidimensional indices of truthy values in a list at depth 0.",
-    "description": "<a href='/atoms/truthy-indices'><code>T</code> (Truthy Indices)</a> is the one-dimensional version.",
+    "description": "",
     "synonyms": []
   },
   {
@@ -3336,7 +3336,7 @@
     "keywords": ["multidimensional", "rectangular", "truthy", "ones", "indices", "indexes", "list", "array", "with", "values"],
     "tags": ["array", "number"],
     "tagline": "Return a multidimensional rectangular boolean array with <code>1</code>s at the multidimensional indices in the argument and <code>0</code>s elsewhere.",
-    "description": "This is the right inverse of <a href='/atoms/multidimensional-truthy-indices'>Multidimensional Indices of Truthy Values (<code>ŒṪ</code>)</a>. <a href='/atoms/ones-at-indices'><code>Ṭ</code> (Ones at Indices)</a> is the one-dimensional version.",
+    "description": "This is the right inverse of <a href='/atoms/multidimensional-truthy-indices'>Multidimensional Indices of Truthy Values (<code>ŒṪ</code>)</a>.",
     "synonyms": []
   },
   {
@@ -3351,13 +3351,246 @@
     "synonyms": []
   },
   {
-    "symbol": "Œ",
-    "id": "",
-    "name": "",
-    "arity": 1,
-    "keywords": [],
+    "symbol": "œ!",
+    "id": "permutations-without-replacement",
+    "name": "Permutations Without Replacement",
+    "arity": 2,
+    "keywords": ["permutations", "pick", "without", "replacement"],
+    "antiwords": ["with"],
+    "tags": ["miscellaneous", "array", "number", "combinatorics"],
+    "tagline": "Return all ways of picking <code>y</code> elements from <code>x</code> (order matters; the same element cannot be selected twice unless it appears twice).",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œ&",
+    "id": "multiset-intersection",
+    "name": "Multiset Intersection",
+    "arity": 2,
+    "keywords": ["multiset", "intersection"],
+    "tags": ["miscellaneous", "array", "math"],
+    "tagline": "The number of occurrences of each element is the minimum of its occurrences in <code>x</code> and <code>y</code>, and they appear in their order in <code>x</code>.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œ-",
+    "id": "multiset-difference",
+    "name": "Multiset Difference",
+    "arity": 2,
+    "keywords": ["multiset", "difference"],
+    "tags": ["miscellaneous", "array", "math"],
+    "tagline": "The number of occurrences of each element is the its occurrences in <code>x</code> minus its occurrences in <code>y</code>, and they appear in their order in <code>x</code>.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œ^",
+    "id": "multiset-symmetric-difference",
+    "name": "Multiset Symmetric Difference",
+    "arity": 2,
+    "keywords": ["multiset", "intersection"],
+    "tags": ["miscellaneous", "array", "math"],
+    "tagline": "The number of occurrences of each element is the absolute difference between its occurrences in <code>x</code> and <code>y</code>, and they appear in their order in <code>x</code>.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œ¿",
+    "id": "permutation-index-by-key",
+    "name": "Permutation Index By Key",
+    "arity": 2,
+    "keywords": ["permutation", "index"],
+    "tags": ["miscellaneous", "array", "combinatorics"],
+    "tagline": "Find the permutation index of <code>x</code> where the base permutation is <code>x</code> sorted by index in <code>y</code>.",
+    "description": "For example, to compute <code>1,2,3 œ¿ 3,4,1,2</code>, we first sort <code>x</code> by its indices in <code>y</code>, which gives us <code>[3, 1, 2]</code>. Then, we find the permutation index of <code>[1, 2, 3]</code> in all permutations of <code>[3, 1, 2]</code>. The latter's permutations are <code>[[3, 1, 2], [3, 2, 1], [1, 3, 2], [1, 2, 3], [2, 3, 1], [2, 1, 3]]</code>, so the result is <code>4</code>.",
+    "synonyms": []
+  },
+  {
+    "symbol": "œ?",
+    "id": "permutation-at-index",
+    "name": "Permutation At Index",
+    "arity": 2,
+    "keywords": ["permutation", "index", "nth", "xth"],
+    "tags": ["miscellaneous", "array", "combinatorics"],
+    "tagline": "Return the <code>x</code><sup>th</sup> permutation of <code>y</code>.",
+    "description": "<code>x œ? y</code> is equivalent to <code>y Œ! x ị</code> (but much more efficient, as it does not have to generate all <code>len(y)!</code> permutations).",
+    "synonyms": ["ịŒ!}¥"]
+  },
+  {
+    "symbol": "œc",
+    "id": "combinations-without-replacement",
+    "name": "Combinations Without Replacement",
+    "arity": 2,
+    "keywords": ["combinations", "choose", "without", "replacement"],
+    "antiwords": ["with"],
+    "tags": ["miscellaneous", "array", "number", "combinatorics"],
+    "tagline": "Return all ways of choosing <code>y</code> elements from <code>x</code> (order does not matter; the same element cannot be selected twice unless it appears twice).",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œẹ",
+    "id": "all-multidimensional-indices",
+    "name": "All Multidimensional Indices",
+    "arity": 2,
+    "keywords": ["multidimensional", "all", "indices", "indexes", "find", "findall"],
+    "tags": ["array", "number"],
+    "tagline": "Return the multidimensional indices of all occurrences of <code>y</code> in <code>x</code>.",
+    "description": "This does not work if <code>y</code> is a list.",
+    "synonyms": []
+  },
+  {
+    "symbol": "œi",
+    "id": "multidimensional-index-of",
+    "name": "Multidimensional Index Of",
+    "arity": 2,
+    "keywords": ["multidimensional", "indexof", "find"],
+    "tags": ["miscellaneous", "array", "number"],
+    "tagline": "Find the first multidimensional index of <code>y</code> in list <code>x</code>, or <code>[]</code> if the element is not present.",
+    "description": "Unlike <a href='/atoms/index-of'><code>i</code> (Index Of)</a>, this errors if the left argument is not a list rather than automatically casting to a singleton list.",
+    "synonyms": []
+  },
+  {
+    "symbol": "œị",
+    "id": "multidimensional-index-into",
+    "name": "Element At Multidimensional Index",
+    "arity": 2,
+    "keywords": ["multidimensional", "get", "element", "index", "into", "at", "access", "list"],
+    "tags": ["miscellaneous", "array", "number", "vectorize"],
+    "tagline": "Return the element of <code>y</code> at multidimensional index <code>x</code>.</code>.",
+    "description": "If <code>x</code> is empty, return <code>y</code>. Otherwise, replace <code>y</code> with <code>y[x[0]]</code> (behaves exactly as <a href='/index-into'><code>ị</code> (Element At Index)</a> does) and <code>x</code> with <code>x[1:]</code> and repeat.",
+    "synonyms": ["ị@ƒ"]
+  },
+  {
+    "symbol": "œl",
+    "id": "trim-from-left",
+    "name": "Trim From Left",
+    "arity": 2,
+    "keywords": ["trim", "strip", "remove", "edge", "side", "left"],
+    "tags": ["miscellaneous", "array"],
+    "tagline": "Trim the elements of <code>y</code> from the left side of <code>x</code>.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œr",
+    "id": "trim-from-right",
+    "name": "Trim From Right",
+    "arity": 2,
+    "keywords": ["trim", "strip", "remove", "edge", "side", "right"],
+    "tags": ["miscellaneous", "array"],
+    "tagline": "Trim the elements of <code>y</code> from the right side of <code>x</code>.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œs",
+    "id": "split-chunks",
+    "name": "Split (# Chunks)",
+    "arity": 2,
+    "keywords": ["split", "into", "x", "chunks"],
+    "tags": ["miscellaneous", "array", "number", "vectorize"],
+    "tagline": "Return <code>x</code> sliced into <code>y</code> chunks of similar length.",
+    "description": "Vectorizes over the right argument. If the length of <code>x</code> is not divisible by <code>y</code>, extra elements go into the first <code>len(x) % y</code> chunks. Numbers are automatically cast to a range on the left. For example, <code>11 œs 3</code> returns <code>[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11]]</code>.",
+    "synonyms": []
+  },
+  {
+    "symbol": "œ|",
+    "id": "multiset-union",
+    "name": "Multiset Union",
+    "arity": 2,
+    "keywords": ["multiset", "union"],
+    "tags": ["miscellaneous", "array", "math"],
+    "tagline": "The number of occurrences of each element is the maximum of its occurrences in <code>x</code> and <code>y</code>, and they appear in their order in <code>x</code> and then <code>y</code>.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œS",
+    "id": "sleep",
+    "name": "Sleep",
+    "arity": 2,
+    "keywords": ["sleep", "pause", "wait", "time"],
     "tags": ["miscellaneous"],
-    "tagline": "",
+    "tagline": "Sleep for <code>y</code> seconds, then return <code>x</code>.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œṣ",
+    "id": "split-at-sublist-occurrences",
+    "name": "Split At Sublist Occurrences",
+    "arity": 2,
+    "keywords": ["split", "list", "instances", "occurrences", "sublists"],
+    "tags": ["miscellaneous", "array"],
+    "tagline": "Split <code>x</code> at occurrences of <code>y</code> as a sublist.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œċ",
+    "id": "combinations-with-replacement",
+    "name": "Combinations With Replacement",
+    "arity": 2,
+    "keywords": ["combinations", "choose", "with", "replacement"],
+    "tags": ["miscellaneous", "array", "number", "combinatorics"],
+    "tagline": "Return all ways of choosing <code>y</code> elements from <code>x</code> (order does not matter; the same element can be selected multiple times).",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œṖ",
+    "id": "partition-at-indices",
+    "name": "Partition At Indices",
+    "arity": 2,
+    "keywords": ["partition", "indices", "indexes"],
+    "tags": ["miscellaneous", "array", "number"],
+    "tagline": "Partition <code>y</code> at the indices in <code>x</code>; start a new sublist at each index in <code>x</code>.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œṗ",
+    "id": "partition-before-truthy",
+    "name": "Partition Before Truthy Indices",
+    "arity": 2,
+    "keywords": ["partition", "before", "truthy", "indices", "indexes", "ones", "true"],
+    "tags": ["miscellaneous", "array", "boolean"],
+    "tagline": "Partition <code>y</code> before the truthy indices in <code>x</code>.",
+    "description": "Similar to <code>Ḋk¥</code>, but that may return an extra empty list that <code>œṗ</code> wouldn't.",
+    "synonyms": ["TœṖ¥"]
+  },
+  {
+    "symbol": "œP",
+    "id": "partition-at-indices-discard",
+    "name": "Partition At Indices (Discard Borders)",
+    "arity": 2,
+    "keywords": ["partition", "indices", "indexes", "delete", "remove", "discard", "borders"],
+    "tags": ["miscellaneous", "array", "number"],
+    "tagline": "Partition <code>y</code> at the indices in <code>x</code> without keeping the borders.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œp",
+    "id": "partition-at-truthy-discard",
+    "name": "Partition At Truthy Indices (Discard Borders)",
+    "arity": 2,
+    "keywords": ["partition", "truthy", "indices", "indexes", "ones", "true", "delete", "remove", "discard", "borders"],
+    "tags": ["miscellaneous", "array", "boolean"],
+    "tagline": "Partition <code>y</code> at the truthy indices in <code>x</code> without keeping the borders.",
+    "description": "",
+    "synonyms": []
+  },
+  {
+    "symbol": "œṡ",
+    "id": "split-once",
+    "name": "Split At First Occurrence",
+    "arity": 2,
+    "keywords": ["split", "once", "first", "time", "occurrence"],
+    "tags": ["miscellaneous", "array"],
+    "tagline": "Split <code>x</code> at the first occurrence of <code>y</code>.",
     "description": "",
     "synonyms": []
   }
