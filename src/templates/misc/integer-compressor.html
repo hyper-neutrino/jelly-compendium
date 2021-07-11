@@ -3,7 +3,7 @@
 {% block content %}
   <h3>Integer Compression Tool</h3>
   <ul class="collapsible">
-    <li>
+    <li {% if request.args["open"] == "1" %} class="active" {% endif %}>
       <div class="collapsible-header"><i class="material-icons">info</i>Information</div>
       <div class="collapsible-body">
         <p>Jelly has four literal types that can represent integers or integer lists shorter than the trivial representation.</p>

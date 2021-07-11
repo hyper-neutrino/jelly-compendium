@@ -1,20 +1,5 @@
 $(document).ready(function() {
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const params = Object.fromEntries(urlSearchParams.entries());
-
-  for (var include of (params.i || "").split(" ")) {
-    var element = document.getElementById("include-" + include);
-    if (element) element.checked = true;
-  }
-
-  for (var tag of (params.tags || "").split(" ")) {
-    var element = document.getElementById("tag-" + tag);
-    if (element) element.checked = true;
-  }
-
-  $("#search-box").val(params.q || "");
   M.updateTextFields();
-
   update_search();
 
   $(".tagbox").each(function(index, element) {
@@ -43,6 +28,7 @@ function get_search() {
   var include = [];
   var tags = [];
   var query = $("#search-box").val();
+  var intersect = document.getElementById("switch").checked;
   $(".include").each(function(index, element) {
     if (element.checked) {
       include.push(element.getAttribute("data-category"));
@@ -53,14 +39,17 @@ function get_search() {
       tags.push(element.parentNode.getAttribute("data-name"));
     }
   });
-  return [include, tags, query];
+  return [include, tags, query, intersect];
 }
 
 function update_search() {
-  var [include, tags, query] = get_search();
+  var [include, tags, query, intersect] = get_search();
   var query_args = [];
   if (query) {
     query_args.push("q=" + encodeURIComponent(query));
+  }
+  if (intersect) {
+    query_args.push("all=1")
   }
   if (include.length) {
     query_args.push("i=" + include.map(function(x) {
@@ -161,4 +150,9 @@ function update_search() {
     }
     element.hidden = !(tagged || notags);
   });
+}
+
+function clear_tags() {
+  $(".tag").prop("checked", false);
+  update_search();
 }

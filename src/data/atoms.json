@@ -546,7 +546,7 @@
     "keywords": ["insignificant", "less", "than", "1", "one", "small"],
     "tags": ["math", "number", "vectorize"],
     "tagline": "insignificant; determine if the number's absolute value is less than or equal to 1.",
-    "description": "In other words, it checks if a number is within the unit circle in the complex plain (including the edge). This is useful when you have a positive array and want to check for <code>1</code>s.",
+    "description": "In other words, it checks if a number is within the unit circle in the complex plane (including the edge). This is useful when you have a positive array and want to check for <code>1</code>s.",
     "synonyms": []
   },
   {
@@ -720,7 +720,7 @@
     "name": "Ceiling",
     "arity": 1,
     "keywords": ["ceiling", "round", "up", "nearest", "integer"],
-    "tags": ["math", "number", "vectorize"],
+    "tags": ["math", "number", "vectorize", "complex"],
     "tagline": "Round up to the nearest integer (real) / real part (complex).",
     "description": "",
     "synonyms": []
@@ -753,7 +753,7 @@
     "name": "Floor",
     "arity": 1,
     "keywords": ["floor", "round", "down", "nearest", "integer"],
-    "tags": ["math", "number", "vectorize"],
+    "tags": ["math", "number", "vectorize", "complex"],
     "tagline": "Round down to the nearest integer (real) / imaginary part (complex).",
     "description": "",
     "synonyms": []
@@ -852,7 +852,7 @@
     "name": "Sign / Conjugate",
     "arity": 1,
     "keywords": ["sign", "conjugate"],
-    "tags": ["math", "number", "vectorize"],
+    "tags": ["math", "number", "vectorize", "complex"],
     "tagline": "Return the sign (real), return the conjugate (complex).",
     "description": "For real numbers, if the number is positive, return <code>1</code>, if it is negative, return <code>-1</code>, and otherwise, return <code>0</code>. For a complex number <code>a + bi</code>, return <code>a - bi</code> (the <a href='https://en.wikipedia.org/wiki/Complex_conjugate'>complex conjugate</a>).",
     "synonyms": []
@@ -1470,7 +1470,7 @@
     "keywords": ["base", "decompression", "convert", "conversion", "index", "into"],
     "tags": ["array", "number", "base"],
     "tagline": "Convert <code>x</code> into base <code>len(y)</code> and then index into <code>y</code>.",
-    "description": "This is a good way to encode a list of repetitive values that don't form an easily compressible pattern. For example, to represent the string <code>\"abcabbacbbcabcbbacbacbcbacb\"</code>, there is no good pattern to it, but if you index into <code>\"abc\"</code> (using <code>0</code> for the last element instead of <code>3</code>, so it can be converted into the appropriate base), you obtain the list <code>[1, 2, 0, 1, 2, 2, 1, 0, 2, 2, 0, 1, 2, 0, 2, 2, 1, 0, 2, 1, 0, 2, 0, 2, 1, 0, 2]</code>, which is <code>4418814364301</code> in base 3, which can be <a href='/misc/integer-compressor'>compressed</a> into <code>“¤²5÷Ṫ2’</code>. Thus, <code>“¤²5÷Ṫ2’ṃ“abc”</code> decodes as <code>\"abcabbacbbcabcbbacbacbcbacb\"</code>, which saves 14 bytes, even including the trailing <code>¤</code> to combine it into a single nilad. Note that the index of the first value must not be zero when you are compressing, because base decoding does not produce leading zeroes.<br /><br />You can generate these compressed forms <a href='/misc/base-compressor'>here</a>.",
+    "description": "This is a good way to encode a list of repetitive values that don't form an easily compressible pattern. For example, to represent the string <code>\"abcabbacbbcabcbbacbacbcbacb\"</code>, there is no good pattern to it, but if you index into <code>\"abc\"</code> (using <code>0</code> for the last element instead of <code>3</code>, so it can be converted into the appropriate base), you obtain the list <code>[1, 2, 0, 1, 2, 2, 1, 0, 2, 2, 0, 1, 2, 0, 2, 2, 1, 0, 2, 1, 0, 2, 0, 2, 1, 0, 2]</code>, which is <code>4418814364301</code> in base 3, which can be <a href='/misc/integer-compressor?open=1'>compressed</a> into <code>“¤²5÷Ṫ2’</code>. Thus, <code>“¤²5÷Ṫ2’ṃ“abc”</code> decodes as <code>\"abcabbacbbcabcbbacbacbcbacb\"</code>, which saves 14 bytes, even including the trailing <code>¤</code> to combine it into a single nilad. Note that the index of the first value must not be zero when you are compressing, because base decoding does not produce leading zeroes.<br /><br />You can generate these compressed forms <a href='/misc/base-compressor'>here</a>.",
     "synonyms": ["bL}¹ịʋ"]
   },
   {
@@ -2431,7 +2431,7 @@
     "name": "Build Complex Number",
     "arity": 1,
     "keywords": ["combine", "join", "pair", "merge", "build", "complex", "imaginary"],
-    "tags": ["arithmetic", "math", "number", "array", "vectorize"],
+    "tags": ["arithmetic", "math", "number", "array", "vectorize", "complex"],
     "tagline": "Convert the first two elements of <code>z</code> into the complex number <code>z[0] + z[1] × i</code>.",
     "description": "Extra values are truncated and missing values are filled with <code>0</code>. Vectorizes at depth 1.",
     "synonyms": []
@@ -2816,7 +2816,7 @@
     "name": "Pair Into Complex Number",
     "arity": 2,
     "keywords": ["pair", "join", "merge", "build", "complex", "number"],
-    "tags": ["arithmetic", "math", "number", "vectorize"],
+    "tags": ["arithmetic", "math", "number", "vectorize", "complex"],
     "tagline": "Return <code>x + y × i</code> (construct a complex number).",
     "description": "",
     "synonyms": [",Æị¥"]

@@ -6,6 +6,8 @@
   <p><b>Note:</b> the arity of a quick in this table is the arity of the resulting link, <em>not</em> the number of links it consumes. "Variadic" means the resulting link's arity is internally <code>-1</code> and thus gets coerced depending on context, whereas "depends" means the resulting link has fixed arity but depends on the consumed links.</p>
 
   <ul class="collapsible">
+    {% set ctypes = request.args.get("i", "").split() %}
+    {% set ctags = request.args.get("tags", "").split() %}
     <li class="active">
       <div class="collapsible-header"><i class="material-icons">filter_list</i>Filters</div>
       <div class="collapsible-body">
@@ -17,16 +19,16 @@
               <br />
               <table class="search-option-table">
                 <tr>
-                  <td><label><input class="include" id="include-atoms" type="checkbox" data-category="atoms" /><span><b>Atoms</b></span></label></td>
-                  <td><label><input class="include" id="include-nilads" type="checkbox" data-category="nilads" /><span>Nilads</span></label></td>
-                  <td><label><input class="include" id="include-monads" type="checkbox" data-category="monads" /><span>Monads</span></label></td>
-                  <td><label><input class="include" id="include-dyads" type="checkbox" data-category="dyads" /><span>Dyads </span></label></td>
+                  <td><label><input class="include" id="include-atoms" type="checkbox" data-category="atoms" {% if "atoms" in ctypes %} checked {% endif %} /><span><b>Atoms</b></span></label></td>
+                  <td><label><input class="include" id="include-nilads" type="checkbox" data-category="nilads" {% if "nilads" in ctypes %} checked {% endif %} /><span>Nilads</span></label></td>
+                  <td><label><input class="include" id="include-monads" type="checkbox" data-category="monads" {% if "monads" in ctypes %} checked {% endif %} /><span>Monads</span></label></td>
+                  <td><label><input class="include" id="include-dyads" type="checkbox" data-category="dyads" {% if "dyads" in ctypes %} checked {% endif %} /><span>Dyads </span></label></td>
                 </tr>
                 <tr>
-                  <td><label><input class="include" id="include-quicks" type="checkbox" data-category="quicks" /><span><b>Quicks</b></span></label></td>
+                  <td><label><input class="include" id="include-quicks" type="checkbox" data-category="quicks" {% if "quicks" in ctypes %} checked {% endif %} /><span><b>Quicks</b></span></label></td>
                 </tr>
                 <tr>
-                  <td><label><input class="include" id="include-syntax" type="checkbox" data-category="syntax" /><span><b>Syntax</b></span></label></td>
+                  <td><label><input class="include" id="include-syntax" type="checkbox" data-category="syntax" {% if "syntax" in ctypes %} checked {% endif %} /><span><b>Syntax</b></span></label></td>
                 </tr>
               </table>
               <br />
@@ -34,19 +36,20 @@
               <br />
               <br />
               <div class="switch">
-                <label>
+                <label style="padding-right: 2.5em">
                   <span class="larger-text">union</span>
-                  <input id="switch" type="checkbox" />
+                  <input id="switch" type="checkbox" {% if request.args["all"] == "1" %} checked {% endif %} />
                   <span class="lever"></span>
                   <span class="larger-text">intersection</span>
                 </label>
+                <button class="waves-effect red btn" onclick="clear_tags()">CLEAR</button>
               </div>
               <br />
               <table class="search-option-table">
-                {% for row in range(0, tags | length, 6) %}
+                {% for row in range(0, tags | length, 5) %}
                   <tr>
-                    {% for tag in tags[row:row + 6] %}
-                      <td><label class="tagbox" data-name="{{ tag }}" data-info="{{ taginfo[tag] }}"><input class="tag" id="tag-{{ tag }}" type="checkbox" /><span>{{ tag }}</span></label></td>
+                    {% for tag in tags[row:row + 5] %}
+                      <td><label class="tagbox" data-name="{{ tag }}" data-info="{{ taginfo[tag] }}"><input class="tag" id="tag-{{ tag }}" type="checkbox" {% if tag in ctags %} checked {% endif %}/><span>{{ tag }}</span></label></td>
                     {% endfor %}
                   </tr>
                 {% endfor %}
@@ -67,7 +70,7 @@
   <center>
     <div class="row">
       <div class="input-field col s10 offset-s1">
-        <input id="search-box" type="text" />
+        <input id="search-box" type="text" value="{{ request.args.get('q', '') }}" />
         <label for="search-box">Search by keywords</label>
       </div>
     </div>
