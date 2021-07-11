@@ -622,7 +622,7 @@
     "arity": 1,
     "keywords": ["sort", "order"],
     "tags": ["array", "combinatorics"],
-    "tagline": "Sort a list from smallest to largest.",
+    "tagline": "Stable sort a list from smallest to largest.",
     "description": "Sorting mixed lists may fail because it just directly compares the elements with Python's built-in comparison. If you need to sort a list of elements and some specific key function makes sense, consider the <a href='/quicks/sort-by'>Sort By Key Function (<code>Þ</code>)</a> quick.",
     "synonyms": []
   },
@@ -689,7 +689,7 @@
     "keywords": ["prime", "primality", "primeq", "check", "determine"],
     "tags": ["math", "number", "boolean", "vectorize", "prime"],
     "tagline": "Return <code>1</code> if <code>z</code> is prime and <code>0</code> otherwise.",
-    "description": "This is an alias for the previous two-byte atom, <code>ÆP</code>.",
+    "description": "This is an alias for <code>ÆP</code>, which is still available for backwards compatibility.",
     "synonyms": ["ÆP"]
   },
   {
@@ -2336,17 +2336,6 @@
     "tagline": "Return the <code>z</code><sup>th</sup> prime.",
     "description": "",
     "synonyms": []
-  },
-  {
-    "symbol": "ÆP",
-    "id": "is-prime-deprecated",
-    "name": "Primality (Deprecated)",
-    "arity": 1,
-    "keywords": ["prime", "primality", "primeq", "check", "determine"],
-    "tags": ["arithmetic", "math", "number", "boolean", "vectorize", "prime"],
-    "tagline": "Aliased as <code>Ẓ</code>. Return <code>1</code> if <code>z</code> is prime and <code>0</code> otherwise.",
-    "description": "",
-    "synonyms": ["Ẓ"]
   },
   {
     "symbol": "ÆR",
