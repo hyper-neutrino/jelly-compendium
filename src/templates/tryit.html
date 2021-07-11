@@ -10,6 +10,9 @@
 {% endblock %}
 
 {% block content %}
+  {% for src, dest in shortcuts.items() %}
+    <span class="shortcut-data" data-src="{{ src }}" data-dest="{{ dest }}"></span>
+  {% endfor %}
   <br />
   <button id="run" class="waves-effect light-blue btn" onclick="run()">RUN</button>
   <button class="waves-effect light-blue btn" onclick="link()">LINK</button>
@@ -35,6 +38,7 @@
             </tr>
           {% endfor %}
         </table>
+        <p>You can also press <kbd>ALT-ENTER</kbd> to combine the last couple of characters. See <a href="/misc/char-combos" target="_blank">this page</a> for a list of these combinations.</p>
       </div>
     <li>
       <div class="collapsible-header"><i class="material-icons">code</i><b id="header-label">Header: 0 bytes</b></div>
@@ -91,6 +95,8 @@
       </div>
     </li>
   </ul>
+
+  This page's design is heavily inspired by <a href="https://tio.run/#">Try It Online!</a> and uses its API to run code. Full credit to Dennis for his amazing work on TIO.
 {% endblock %}
 
 {% block tail %}

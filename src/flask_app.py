@@ -3,6 +3,8 @@ from page_generators import *
 from flask import Flask, abort, render_template
 from flask_cors import CORS
 
+import unicodedata
+
 app = Flask(__name__)
 CORS(app)
 
@@ -22,15 +24,12 @@ def serve_charpage(index):
         return render_template("newlinepage.html")
     if 0 <= index < 256:
         char = codepage[index]
-        return render_template("charpage.html", data = charmap[char], char = char)
+        return render_template("charpage.html", data = charmap[char], char = char, charname = unicodedata.name(char), shortcuts = ", ".join(f"<code>{k}</code>" for k in shortcuts if shortcuts[k] == char))
     abort(404)
 
 @app.route("/misc/<id>")
 def serve_misc(id):
-    try:
-        return render_template(f"misc/{id}.html")
-    except:
-        abort(404)
+    return render_template(f"misc/{id}.html", **({"shortcuts": shortcuts} if id == "char-combos" else {}))
 
 @app.route("/<category>/<id>")
 def serve_category(category, id):
@@ -54,7 +53,7 @@ def serve_beginners():
 
 @app.route("/tio")
 def serve_tio():
-    return render_template("tryit.html", codepage = codepage)
+    return render_template("tryit.html", codepage = codepage, shortcuts = shortcuts)
 
 @app.route("/explain")
 def serve_explain():

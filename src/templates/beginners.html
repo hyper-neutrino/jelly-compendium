@@ -79,7 +79,7 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
         <span><a href="#nilad-monad-chains"><i class="material-icons">link</i></a></span><br />
         <p>The main link is run with its arity determined by the number of arguments. We will begin by exploring niladic and monadic chains together, as they work nearly identically. If a chain is run niladically, there are two possibilities. If it begins with a nilad, the remainder of the chain is evaluated monadically on that argument. Otherwise, the chain is evaluated monadically at zero. So, <code>13 + 4 H</code> is equivalent to <code>+ 4 H</code> evaluated with an argument of <code>13</code>, and <code>+ H _</code> is equivalent to the same link evaluated monadically on <code>0</code>.</p>
         <p>To evaluate a monadic chain, we have two starting situations. If the link begins with a nilad, it is popped off and becomes the <i>current value</i>. Otherwise, the current value begins as the chain's argument.</p>
-        <p>Then, we can walk down the chain and match patterns of links as we go, slicing off each match, evaluating it, and setting the <i>current value</i> to the new value. We will represent nilads with digits, monads with uppercase letters, and dyads with mathematical operators, such as <code>+ × ÷</code>. The left argument will be referred to as <code>ω</code>, and the current value will be <code>λ</code>. For monadic chains, these are the patterns (the first one matched is applied):</p>
+        <p>Then, we can walk down the chain and match patterns of links as we go, slicing off each match, evaluating it, and setting the <i>current value</i> to the new value. We will represent nilads with digits, monads with uppercase letters, and dyads with mathematical operators, such as <code>+ × ÷</code>. The left argument will be referred to as <code>α</code>, and the current value will be <code>λ</code>. For monadic chains, these are the patterns (the first one matched is applied):</p>
         <center>
           <table class="halfwidth">
             <tr>
@@ -89,7 +89,7 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
             </tr>
             <tr>
               <td><code>+ F ...</code></td>
-              <td><code>λ + F(ω)</code></td>
+              <td><code>λ + F(α)</code></td>
               <td>2,1-chain</td>
             </tr>
             <tr>
@@ -104,7 +104,7 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
             </tr>
             <tr>
               <td><code>+</code></td>
-              <td><code>λ + ω</code></td>
+              <td><code>λ + α</code></td>
               <td>Lone Dyad</td>
             </tr>
             <tr>
@@ -174,7 +174,7 @@ link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
             </tr>
           </table>
         </center>
-        <p>* The 2,2,0-chain rule only applies if the nilad is not followed by a dyad.</p>
+        <p>* The 2,2,0-chain rule only applies if the nilad is part of an LCC; that is, the nilad is not followed by a dyad.</p>
         <p>Like with niladic / monadic chains, if a nilad is encountered that is not part of one of these rules, it smash-prints the current value of <code>λ</code> and sets <code>λ</code> to the new nilad's value.</p>
       </div>
     </li>

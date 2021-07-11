@@ -176,3 +176,11 @@ span.key {
 .halfwidth {
   width: 50%;
 }
+
+.quarterwidth {
+  width: 25%;
+}
+
+.pad {
+  padding-right: 5em;
+}

@@ -10,6 +10,9 @@ with open("src/data/codepage.txt", "r") as f:
 with open("src/data/tags.json", "r") as f:
     tags = json.load(f)
 
+with open("src/data/shortcuts.json", "r") as f:
+    shortcuts = json.load(f)
+
 data = {
     "atoms": {},
     "quicks": {},

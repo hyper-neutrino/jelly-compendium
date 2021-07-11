@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h3>Character Combos for TIO</h3>
+  <p>The following is a complete list of all available character combos for the <a href="/tio">Try It Online!</a> interface on this site. To use one, press <kbd>ALT-ENTER</kbd> after a valid combo and it will combine them. If you notice a combo that is a suffix of another, please open a bug report, as this will prevent one of the combos from being used correctly.</p>
+  <center>
+    <table class="quarterwidth">
+      <tr>
+        <th>Combination</th>
+        <th>Result</th>
+        <th class="pad"></th>
+        <th>Combination</th>
+        <th>Result</th>
+        <th class="pad"></th>
+        <th>Combination</th>
+        <th>Result</th>
+        <th class="pad"></th>
+        <th>Combination</th>
+        <th>Result</th>
+        <th class="pad"></th>
+      </tr>
+      {% for index in range(0, shortcuts.items() | length, 4) %}
+        <tr>
+          {% for i in range(index, index + 4) %}
+            <td><code>{{ (shortcuts.items() | list)[i][0] }}</code></td>
+            <td><code>{{ (shortcuts.items() | list)[i][1] }}</code></td>
+            <td class="pad"></td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  </center>
+  <br /><br />
+{% endblock %}
