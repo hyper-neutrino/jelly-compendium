@@ -37,9 +37,9 @@
         <span><a href="#first-program"><i class="material-icons">link</i></a></span><br />
         <p>Let's begin with a very simple program - Hello World. To get started, head over to the <a href="/tio">online Jelly executor</a> on this site or <a href="https://tio.run/#jelly">Try It Online!</a> (created by Dennis).</p>
         <p>In Jelly, strings begin with <code>“</code> and end with <code>”</code>. So, the most basic solution would be this:</p>
-        <pre><code class="language-plaintext">“Hello, World!”</code></pre>
+        <pre><code>“Hello, World!”</code></pre>
         <p>If a string is not terminated at the end of the program, it is implicitly closed, so you can drop the last <code>”</code>. However, there is a shorter way to output <code>Hello, World!</code> by using <a href="/misc/string-compressor">dictionary-compressed strings</a>. You can read a more thorough explanation on that page. The rough summary of how it works is if a string is terminated using <code>»</code>, its contents are converted to a base-250 integer and decompressed using a specific algorithm. This tends to be much shorter for strings of mostly English text that can be encoded into dictionary entries; however, for more random strings, it can end up taking more characters. In this case, the shortest way to solve Hello World is to use a compressed string:</p>
-        <pre><code class="language-plaintext">“3ḅaė;œ»</code></pre>
+        <pre><code>“3ḅaė;œ»</code></pre>
         <p>Don't worry if the exact algorithm doesn't make sense, and you definitely shouldn't try to learn how to compress strings yourself. The string compression tool allows you to do that easily.</p>
       </div>
     </li>
@@ -55,7 +55,7 @@
         <p>If multiple literals are written adjacently separated by <code>,</code> (with no extra spaces), they become a list. Note that <code>,</code> is also the <a href="/atoms/pair">pair</a> dyad, and if there are spaces around the comma or it only has a literal on one side, it will act as such. You can also use square brackets to nest lists (but they must be balanced); for example, <code>[1,2],[3,[4,5]],6</code> evaluates to <code>[[1, 2], [3, [4, 5]], 6]</code>, and <code>[1, 2]</code> errors because the space causes it to be split up into <code>[1</code> (unbalanced), <code>,</code>, and <code>2]</code> (unbalanced).</p>
         <p>Once a literal has been parsed, it is equivalent to a constant nilad that returns that value.</p>
         <p>Newlines and pilcrows (<code>¶</code>) are the same (they are translated to the same byte internally) and they can be used to separate links. It is convention to use newlines to separate links and pilcrows in literals where you want codepoint 127. For example, the following code consists of three links:</p>
-        <pre><code class="language-plaintext">link 1
+        <pre><code>link 1
 link 2 ¶ link 3 “ ¶ this is still part of link 3 ”</code></pre>
         <p>Only the last link is run by default, and it can refer to other links to call on them, sort of like defining multiple helper functions and a main function in C++.</p>
         <p>Finally, <code>ø</code>, <code>µ</code>, <code>)</code>, <code>ð</code>, and <code>ɓ</code> are chain separators. We will explore those later, as they get quite complex.</p>

@@ -62,11 +62,11 @@ def serve_explain():
 
 @app.errorhandler(404)
 def serve_404(e):
-    return render_template("404.html")
+    return render_template("404.html"), 404
 
 @app.errorhandler(500)
 def serve_500(e):
-    return render_template("500.html")
+    return render_template("500.html"), 500
 
 if __name__ == "__main__":
     import sys

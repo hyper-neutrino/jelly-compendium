@@ -6,7 +6,6 @@ queue = ["http://localhost:5000"]
 scanned = set(queue)
 
 for url in queue:
-    print("scanning " + url)
     res = requests.get(url)
     if res.status_code == 200:
         if "localhost" not in url:

@@ -3037,7 +3037,7 @@
     "arity": 1,
     "keywords": ["partition", "list", "nonempty"],
     "tags": ["miscellaneous", "math", "array", "combinatorics"],
-    "tagline": "Like <a href='/partition'><code>ŒṖ</code> (Partition)</a>; partition a list but return <code>[[]]</code> for the empty list.",
+    "tagline": "Like <a href='/atoms/partition'><code>ŒṖ</code> (Partition)</a>; partition a list but return <code>[[]]</code> for the empty list.",
     "description": "The partition of <code>z</code> is the list of all ways to divide <code>z</code> into sublists. For example, <code>3R Œb</code> returns <code>[[[1], [2], [3]], [[1], [2, 3]], [[1, 2], [3]], [[1, 2, 3]]]</code>.",
     "synonyms": []
   },
@@ -3082,7 +3082,7 @@
     "arity": 1,
     "keywords": ["matrix", "reconstruct", "rebuild", "recreate", "antidiagonals"],
     "tags": ["miscellaneous", "matrix", "vectorize"],
-    "tagline": "Given the antidiagonals of a matrix, return that matrix. See <a href='/matrix-antidiagonals'><code>Œd</code> (Matrix Antidiagonals)</a> for the format; this is its left inverse.",
+    "tagline": "Given the antidiagonals of a matrix, return that matrix. See <a href='/atoms/matrix-antidiagonals'><code>Œd</code> (Matrix Antidiagonals)</a> for the format; this is its left inverse.",
     "description": "",
     "synonyms": []
   },
@@ -3247,7 +3247,7 @@
     "arity": 1,
     "keywords": ["matrix", "reconstruct", "rebuild", "recreate", "diagonals"],
     "tags": ["miscellaneous", "matrix", "vectorize"],
-    "tagline": "Given the diagonals of a matrix, return that matrix. See <a href='/matrix-diagonals'><code>ŒD</code> (Matrix Diagonals)</a> for the format; this is its left inverse.",
+    "tagline": "Given the diagonals of a matrix, return that matrix. See <a href='/atoms/matrix-diagonals'><code>ŒD</code> (Matrix Diagonals)</a> for the format; this is its left inverse.",
     "description": "",
     "synonyms": []
   },
@@ -3448,7 +3448,7 @@
     "keywords": ["multidimensional", "get", "element", "index", "into", "at", "access", "list"],
     "tags": ["miscellaneous", "array", "number", "vectorize"],
     "tagline": "Return the element of <code>y</code> at multidimensional index <code>x</code>.</code>.",
-    "description": "If <code>x</code> is empty, return <code>y</code>. Otherwise, replace <code>y</code> with <code>y[x[0]]</code> (behaves exactly as <a href='/index-into'><code>ị</code> (Element At Index)</a> does) and <code>x</code> with <code>x[1:]</code> and repeat.",
+    "description": "If <code>x</code> is empty, return <code>y</code>. Otherwise, replace <code>y</code> with <code>y[x[0]]</code> (behaves exactly as <a href='/atoms/index-into'><code>ị</code> (Element At Index)</a> does) and <code>x</code> with <code>x[1:]</code> and repeat.",
     "synonyms": ["ị@ƒ"]
   },
   {

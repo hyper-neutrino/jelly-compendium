@@ -4,7 +4,6 @@ $(document).ready(function() {
     accordion: false
   });
   $(".sidenav").sidenav();
-  hljs.highlightAll();
 });
 
 function copy_codepage() {
