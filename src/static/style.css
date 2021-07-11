@@ -38,6 +38,8 @@ code {
 
 pre code {
   border-radius: 5px;
+  display: block;
+  padding: 5px 10px;
 }
 
 code {

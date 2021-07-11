@@ -3,6 +3,8 @@ from page_generators import *
 from flask import Flask, abort, render_template
 from flask_cors import CORS
 
+from jinja2.exceptions import TemplateNotFound
+
 import unicodedata
 
 app = Flask(__name__)
@@ -29,7 +31,10 @@ def serve_charpage(index):
 
 @app.route("/misc/<id>")
 def serve_misc(id):
-    return render_template(f"misc/{id}.html", **({"shortcuts": shortcuts} if id == "char-combos" else {}))
+    try:
+        return render_template(f"misc/{id}.html", **({"shortcuts": shortcuts} if id == "char-combos" else {}))
+    except TemplateNotFound:
+        abort(404)
 
 @app.route("/<category>/<id>")
 def serve_category(category, id):
