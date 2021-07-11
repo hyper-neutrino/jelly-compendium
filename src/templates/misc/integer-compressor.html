@@ -16,4 +16,14 @@
       </div>
     </li>
   </ul>
+  (Warning: the query gets <code>eval</code>'d by JavaScript in your browser, so don't input anything that might brick your browser. If you just enter normal integers and integer lists, nothing will go wrong. If the input contains anything other than square brackets, commas, digits, minus signs, or whitespace, evaluation will stop.)
+  <br /><br />
+  <div class="input-field">
+    <textarea id="value" class="materialize-textarea monospace tio-field"></textarea>
+    <label for="value">Value to compress</label>
+  </div>
+{% endblock %}
+
+{% block tail %}
+  <script src="/static/integer-compression.js"></script>
 {% endblock %}

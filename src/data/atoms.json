@@ -50,7 +50,7 @@
     "arity": 0,
     "keywords": ["4th", "6th", "fourth", "sixth", "input", "command", "line", "argument", "space"],
     "tags": ["arguments"],
-    "tagline": "Get the first input (third command line argument), or <code>\" \"</code>.",
+    "tagline": "Get the fourth input (sixth command line argument), or <code>\" \"</code>.",
     "description": "If the program is run with at least four inputs (six arguments, ignoring the flags and the file/code), return the value of the fourth input. Otherwise, return <code>\" \"</code>.",
     "synonyms": []
   },
@@ -2076,7 +2076,7 @@
     "arity": 0,
     "keywords": ["constant", "vowels", "with", "including", "include", "y", "all", "aeiouyaeiouy"],
     "tags": ["constant", "string"],
-    "tagline": "Return <code>\"AEIOUYaeiouy</code>.",
+    "tagline": "Return <code>\"AEIOUYaeiouy\"</code>.",
     "description": "",
     "synonyms": []
   },
