@@ -19,6 +19,7 @@ $(document).ready(function() {
         $("#output").val(compress(value));
       }
     }
+    M.textareaAutoResize($("#output"));
   });
 });
 

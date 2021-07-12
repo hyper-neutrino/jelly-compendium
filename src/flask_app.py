@@ -32,7 +32,7 @@ def serve_charpage(index):
 @app.route("/misc/<id>")
 def serve_misc(id):
     try:
-        return render_template(f"misc/{id}.html", **({"shortcuts": shortcuts} if id == "char-combos" else {}))
+        return render_template(f"misc/{id}.html", **({"shortcuts": shortcuts} if id in ["char-combos", "string-compressor"] else {}))
     except TemplateNotFound:
         abort(404)
 

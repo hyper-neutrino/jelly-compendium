@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %}
+  {% for src, dest in shortcuts.items() %}
+    <span class="shortcut-data" data-src="{{ src }}" data-dest="{{ dest }}"></span>
+  {% endfor %}
   <h3>String Compression Tool</h3>
   <ul class="collapsible">
     <li {% if request.args["open"] == "1" %} class="active" {% endif %}>
@@ -27,10 +30,10 @@
       </div>
     </li>
   </ul>
-  If the script detects that the input looks like a string / list of strings in valid JS code (no extra symbols outside of string literals), it will attempt to <code>eval</code> it (to allow you to compress multiple strings). As long as you don't intentionally enter code that looks like a normal literal that will brick your browser, nothing abnormal should happen. If the string you want to use has Jelly string terminators or opening quotation marks, you will need to use <a href="/syntax/character-literal"><code>”</code> (Character Literal)</a>, as there is no way to insert them into a string literal. This compressor will not work on them.
+  If the script detects that the input looks like a string / list of strings in valid JS code (no extra symbols outside of string literals), it will attempt to <code>eval</code> it (to allow you to compress multiple strings). As long as you don't intentionally enter code that looks like a normal literal that will brick your browser, nothing abnormal should happen. If the string you want to use has Jelly string terminators or opening quotation marks, you will need to use <a href="/syntax/character-literal"><code>”</code> (Character Literal)</a>, as there is no way to insert them into a string literal. This compressor will output a valid literal but it will probably be shorter to concatenate the necessary characters together in a non-literal chain. There are often ways to shorten a string using built-in string constants but this compressor guarantees finding the shortest literal to represent your input.
   <br /><br />
   <div class="input-field">
-    <textarea id="value" class="materialize-textarea monospace"></textarea>
+    <textarea id="value" class="materialize-textarea monospace shortcut-field"></textarea>
     <label for="value">Value to compress</label>
   </div>
   <br /><br />
@@ -40,5 +43,7 @@
 {% endblock %}
 
 {% block tail %}
+  <script src="/static/shortcut.js"></script>
+  <script src="/static/dictionary.js"></script>
   <script src="/static/string-compression.js"></script>
 {% endblock %}

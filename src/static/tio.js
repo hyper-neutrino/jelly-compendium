@@ -79,7 +79,7 @@ $(document).ready(function() {
     rm_argument(e.currentTarget);
   });
   $(".tio-field").on("input", function(e) {
-    update_byte_count(e.currentTarget);
+    field_updated(e.currentTarget);
     update_explain_link();
   });
   $("#header, #code, #footer, #stdin, .argument").on("focusin", function(e) {
@@ -93,7 +93,7 @@ $(document).ready(function() {
   });
 });
 
-function update_byte_count(element) {
+function field_updated(element) {
   var label = element.parentNode.parentNode.parentNode.children[0].children[1];
   var bytes = element.value.length;
   label.innerHTML = label.innerHTML.replace(/\d+ bytes?/, bytes + " byte" + "s".repeat(bytes != 1));
@@ -195,7 +195,7 @@ function run() {
 function updateAll() {
   for (var id of ["header", "code", "footer", "stdin", "stdout", "stderr"]) {
     M.textareaAutoResize($("#" + id));
-    update_byte_count(document.getElementById(id));
+    field_updated(document.getElementById(id));
   }
 }
 
@@ -206,7 +206,7 @@ function type(char) {
   chars.splice(target.selectionStart, target.selectionEnd - target.selectionStart, [char]).join("");
   target.value = chars.join("");
 
-  update_byte_count(target);
+  field_updated(target);
 
   target.focus();
   M.textareaAutoResize($(target));
@@ -253,7 +253,7 @@ function format() {
 function cmc() {
   document.location = url();
   var code = $("#code").val().replace("\n", "¶");
-  $("#stdout").val("Jelly, " + code.length + " byte" + "s".repeat(code.length != 1) + ": [`" + code.replace("`", "\\`") + "`](" + document.location + ")").select().focus();
+  $("#stdout").val("Jelly, " + code.length + " byte" + "s".repeat(code.length != 1) + ": `" + code.replaceAll("`", "\\`") + "` ([Try It Online!](" + document.location + "))").select().focus();
   updateAll();
   scroll();
 }

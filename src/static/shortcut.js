@@ -5,7 +5,7 @@ $(document).ready(function() {
     shortcuts[element.getAttribute("data-src")] = element.getAttribute("data-dest");
   });
 
-  $(".tio-field").keydown(function(e) {
+  $(".tio-field, .shortcut-field").keydown(function(e) {
     if (e.altKey && e.keyCode == 13) {
       e.preventDefault();
       var elem = e.currentTarget;
@@ -20,7 +20,7 @@ $(document).ready(function() {
       if (mx.length) {
         elem.value = elem.value.substring(0, pos - mx.length) + shortcuts[mx] + elem.value.substring(pos);
         elem.selectionStart = elem.selectionEnd = pos - mx.length + shortcuts[mx].length;
-        update_byte_count(elem);
+        if (window.field_updated) field_updated(elem);
       }
     }
   });
