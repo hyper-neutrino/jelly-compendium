@@ -1012,6 +1012,17 @@
     "synonyms": []
   },
   {
+    "symbol": "+",
+    "id": "addition",
+    "name": "Addition",
+    "arity": 2,
+    "keywords": ["addition", "sum", "plus"],
+    "tags": ["math", "number", "vectorize"],
+    "tagline": "Return <code>x + y</code>.",
+    "description": "",
+    "synonyms": []
+  },
+  {
     "symbol": ",",
     "id": "pair",
     "name": "Pair",

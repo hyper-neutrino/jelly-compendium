@@ -3,7 +3,7 @@
     "symbol": "“",
     "id": "begin-string",
     "name": "Begin String Literal",
-    "keywords": ["literal", "string", "begin", "list", "compressed", "compression", "integer", "dictionary", "base250"],
+    "keywords": ["literal", "string", "begin", "list", "compressed", "compression", "integer", "dictionary", "base250", "open"],
     "tags": ["literal", "string", "number", "array"],
     "tagline": "Begin a string literal. String literals can be terminated with various characters that change the decoding of the string.",
     "description": "The following characters exist as string terminators:</p><ul class='larger-text'><li><a href='/syntax/end-string'><code>”</code> (String Literal Terminator)</a></li><li><a href='/syntax/unmapped-terminator'><code>«</code> (Unmapped String Literal Terminator)</a></li><li><a href='/syntax/dictionary-compressed-string'><code>»</code> (Dictionary-Compressed String Terminator)</a></li><li><a href='/syntax/codepage-index-list'><code>‘</code> (Codepage Index List Terminator)</a></li><li><a href='/syntax/end-base-250-number'><code>’</code> (Base 250 Number Terminator)</a></li></ul><p>If another <code>“</code> is encountered while scanning a string literal, the literal becomes a list, and each subsection divided by <code>“</code>s is evaluated according to the string terminator. If the end of the file is reached before the string is closed, it is automatically terminated with <code>”</code>."
@@ -12,7 +12,7 @@
     "symbol": "”",
     "id": "end-string",
     "name": "String Literal Terminator",
-    "keywords": ["literal", "string", "end", "terminator", "plain", "normal"],
+    "keywords": ["literal", "string", "end", "terminator", "plain", "normal", "close"],
     "tags": ["literal", "string"],
     "tagline": "Terminate a regular string literal. Simply return the characters in the string as-is.",
     "description": "Also see <a href='/syntax/begin-string'><code>“</code> (Begin String Literal)</a>."
@@ -21,7 +21,7 @@
     "symbol": "«",
     "id": "unmapped-terminator",
     "name": "Unmapped String Literal Terminator",
-    "keywords": ["literal", "string", "end", "terminator", "unmapped", "undefined", "unimplemented"],
+    "keywords": ["literal", "string", "end", "terminator", "unmapped", "undefined", "unimplemented", "close"],
     "tags": ["literal", "string"],
     "tagline": "This is reserved as a string terminator but doesn't have a defined behavior yet. It happens to work just like <a href='/syntax/end-string'><code>”</code> (String Literal Terminator)</a>.",
     "description": "Also see <a href='/syntax/begin-string'><code>“</code> (Begin String Literal)</a>."
@@ -30,7 +30,7 @@
     "symbol": "»",
     "id": "dictionary-compressed-string",
     "name": "Dictionary-Compressed String Terminator",
-    "keywords": ["literal", "string", "terminator", "dictionary", "compressed", "compression"],
+    "keywords": ["literal", "string", "terminator", "dictionary", "compressed", "compression", "close"],
     "tags": ["literal", "string"],
     "tagline": "Terminate a dictionary-compressed string.",
     "description": "Rather than being evaluated literally, the characters are converted into a base-250 integer and converted to a string using Jelly's decompression function, <a href='https://github.com/DennisMitchell/jellylanguage/blob/master/jelly/interpreter.py#L1055'><code>sss</code></a>. You can convert strings to their compressed form using the <a href='/misc/string-compressor'>online tool</a>, which also explains the compression/decompression algorithm. For example, <a href='/tio#WyIiLCLigJwz4biFYcSXO8WTwrsiLCIiLCIiLFtdXQ=='><code>“3ḅaė;œ»</code></a> evaluates to <code>Hello, World!</code> and <a href='/tio#WyIiLCLigJzCvcSL4bmtNiDhu7TigJzDkSfIrzZKxpMzwrsgWSIsIiIsIiIsW11d'><code>“½ċṭ6 Ỵ“Ñ'ȯ6JƓ3»</code></a> evaluates to <code>[\"caird coinheringaahing\", \"Coding Challenges\"]</code>."
@@ -39,7 +39,7 @@
     "symbol": "‘",
     "id": "codepage-index-list",
     "name": "Codepage Index List Terminator",
-    "keywords": ["literal", "terminator", "codepage", "index", "list"],
+    "keywords": ["literal", "terminator", "codepage", "index", "list", "close"],
     "tags": ["literal", "number", "array"],
     "tagline": "Terminates a codepage index list.",
     "description": "Each character is mapped to its index in Jelly's codepage, where <code>¡</code> is <code>0</code> and <code>ż</code> is <code>249</code>. For example, <a href='/tio#WyIiLCLigJzCosKkZEnigJgiLCIiLCIiLFtdXQ=='><code>“¢¤dI‘</code></a> evaluates to <code>[1, 3, 100, 73]</code>. Also see <a href='/syntax/begin-string'><code>“</code> (Begin String Literal)</a>."
@@ -48,10 +48,19 @@
     "symbol": "’",
     "id": "end-base-250-number",
     "name": "Base 250 Number Terminator",
-    "keywords": ["literal", "base250", "compressed", "number", "integer"],
+    "keywords": ["literal", "base250", "compressed", "number", "integer", "close"],
     "tags": ["literal", "number"],
     "tagline": "Terminates a base-250 compressed number.",
     "description": "Each character is mapped to its index in Jelly's codepage, where <code>¡</code> is <code>1</code> and <code>ż</code> is <code>250</code>, and then the digits are evaluated in base 250. For example, <a href='/tio#WyIiLCLigJzhuYRC4bmtL+G4tsKjw57igbvigJkiLCIiLCIiLFtdXQ=='><code>“ṄBṭ/Ḷ£Þ⁻’</code></a> evaluates to <code>12345678901234567890</code>. See the <a href='/misc/integer-compressor?open=1'>integer compression tool</a> for more information and for a tool to automatically compress number literals. Also see <a href='/syntax/begin-string'><code>“</code> (Begin String Literal)</a>."
+  },
+  {
+    "symbol": "”",
+    "id": "character-literal",
+    "name": "Character Literal",
+    "keywords": ["literal", "character", "one", "1", "single"],
+    "tags": ["literal", "string"],
+    "tagline": "Outside of a string, turn the next character into a literal.",
+    "description": "This is a single character literal, so it is a one-character Python <code>str</code> object. Single-character strings in Jelly are a singleton list containing a character. This is also <a href='/syntax/end-string'>String Literal Terminator (<code>”</code>)</a>."
   },
   {
     "symbol": "⁾",
