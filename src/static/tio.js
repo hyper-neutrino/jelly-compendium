@@ -1,54 +1,68 @@
-// COPIED: Razetime's APLGolf
-// SEE: https://github.com/razetime/APLgolf/blob/main/main.js
-
-// Following five functions are courtesy of dzaima
-function deflate(arr) {
-    return pako.deflateRaw(arr, {
-        "level": 9
-    });
+function pako_deflate(data) {
+  return pako.deflateRaw(data, {"level": 9});
 }
 
-function inflate(arr) {
-    return pako.inflateRaw(arr);
+function tio_encode(data) {
+  return pako_deflate(new TextEncoder("utf-8").encode(data));
 }
 
-function TIOencode(str) {
-    let bytes = new TextEncoder("utf-8").encode(str);
-    return deflate(bytes);
+function to_base64(data) {
+  return btoa([...data].map(function(byte) {
+    return String.fromCharCode(byte);
+  }).join("")).replaceAll("+", "@").replaceAll("=", "");
 }
 
-function arrToB64(arr) {
-    var bytestr = "";
-    arr.forEach(c => bytestr += String.fromCharCode(c));
-    return btoa(bytestr).replace(/\+/g, "@").replace(/=+/, "");
+function from_base64(data) {
+  return new Uint8Array([...atob(decodeURIComponent(data).replaceAll("@", "+"))].map(function(char) {
+    return char.charCodeAt(0);
+  }));
 }
 
-function b64ToArr(str) {
-    return new Uint8Array([...atob(decodeURIComponent(str).replace(/@/g, "+"))].map(c => c.charCodeAt()))
+function convert_bytearray(bytes) {
+  var array = new Uint8Array(bytes.length);
+  for (var x = 0; x < bytes.length; x++) {
+    array[x] = bytes.charCodeAt(x);
+  }
+  array.head = 0;
+  return array;
 }
 
-// more help from dzaima here
-async function TIO(code, input, flags, lang) {
-    const encoder = new TextEncoder("utf-8");
-    let length = encoder.encode(code).length;
-    let iLength = encoder.encode(input).length;
-    let fLength = flags.length;
-    //  Vlang\u00001\u0000{language}\u0000F.code.tio\u0000{# of bytes in code}\u0000{code}F.input.tio\u0000{length of input}\u0000{input}Vargs\u0000{number of ARGV}{ARGV}\u0000R
-    let rBody = "Vlang\x001\x00" + lang + "\x00F.code.tio\x00" + length + "\x00" + code + "F.input.tio\x00" + iLength + "\x00" + input + "Vargs\x00" + fLength + flags.map(x => "\x00" + x).join("") + "\x00R";
-    rBody = TIOencode(rBody);
-    let fetched = await fetch("https://tio.run/cgi-bin/run/api/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: rBody
-    });
-    let read = (await fetched.body.getReader().read()).value;
-    let text = new TextDecoder('utf-8').decode(read);
-    return text.slice(16).split(text.slice(0, 16));
+async function TIO(code, input, flags) {
+  let encoder = new TextEncoder("utf-8");
+  let decoder = new TextDecoder("utf-8");
+
+  let code_length = encoder.encode(code).length;
+  let input_length = encoder.encode(input).length;
+  let flags_length = flags.length;
+
+  let request_body = "Vlang\x001\x00jelly\x00F.code.tio\x00" + code_length + "\x00" + code + "F.input.tio\x00" + input_length + "\x00" + input + "Vargs\x00" + flags_length + flags.map(function(flag) {
+    return "\x00" + flag;
+  }).join("") + "\x00R";
+
+  let response = await fetch("https://tio.run/cgi-bin/run/api/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8"
+    },
+    "body": tio_encode(request_body)
+  });
+
+  let read = (await response.body.getReader().read()).value;
+  let text = decoder.decode(read);
+  return text.slice(16).split(text.slice(0, 16));
 }
 
-// -----------------------------------------------------------------------------
+function tio_permalink(header, code, footer, input, args) {
+  var state = "jelly";
+
+  function insert(x) {
+    state += "\xff" + window.unescape(window.encodeURIComponent(x));
+  }
+
+  [header, code, footer, input, ...args].forEach(insert);
+
+  return "https://tio.run/##" + to_base64(pako_deflate(convert_bytearray(state)));
+}
 
 window.last_focus = "code";
 
@@ -177,7 +191,7 @@ function run() {
   });
 
   (function(sid, code, arguments) {
-    TIO(code, $("#stdin").val(), arguments, "jelly").then(function(result) {
+    TIO(code, $("#stdin").val(), arguments).then(function(result) {
       if (canceled[sid]) return;
 
       running = false;
@@ -267,7 +281,9 @@ function get_md5() {
 }
 
 function tio() {
-  alert("This feature is not implemented yet!");
+  window.open(tio_permalink($("#header").val(), $("#code").val(), $("#footer").val(), $("#stdin").val(), [...$(".argument")].map(function(e) {
+    return e.value;
+  })));
 }
 
 function update_explain_link() {
