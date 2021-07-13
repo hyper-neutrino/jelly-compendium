@@ -151,7 +151,7 @@ function recompress(string) {
   // trivially insert the last character in (mode 0)
   var last = recompress(string.substring(0, string.length - 1));
   var best = [last[0] + last[1] * 3n * BigInt(string[string.length - 1] == "¶" || string[string.length - 1] == "\n" ? 95 : string.charCodeAt(string.length - 1) - 32), last[1] * 3n * 96n];
-  console.log("TRIVIAL", string, best);
+  // console.log("TRIVIAL", string, best);
   // insert the last word in unmodified (mode 1)
   for (var lookback = 1; lookback <= MAX_DICT_LEN; lookback++) {
     if (lookback > string.length) {
@@ -170,7 +170,7 @@ function recompress(string) {
       if (idea < best[0]) {
         best[0] = idea;
         best[1] = last[1] * 3n * 2n * SHORT_SIZE;
-        console.log("SHORT-NORMAL", string, best);
+        // console.log("SHORT-NORMAL", string, best);
       }
     } else if (dictmap.long[find] !== undefined) {
       var last = recompress(rem);
@@ -178,7 +178,7 @@ function recompress(string) {
       if (idea < best[0]) {
         best[0] = idea;
         best[1] = last[1] * 3n * 2n * LONG_SIZE;
-        console.log("LONG-NORMAL", string, best);
+        // console.log("LONG-NORMAL", string, best);
       }
     }
   }
@@ -209,7 +209,7 @@ function recompress(string) {
         if (idea < best[0]) {
           best[0] = idea;
           best[1] = last[1] * 3n * 3n * 2n * SHORT_SIZE;
-          console.log("SHORT-FLAGGED", string, best);
+          // console.log("SHORT-FLAGGED", string, best);
         }
       } else if (dictmap.long[find] !== undefined) {
         var last = recompress(rem);
@@ -217,7 +217,7 @@ function recompress(string) {
         if (idea < best[0]) {
           best[0] = idea;
           best[1] = last[1] * 3n * 3n * 2n * LONG_SIZE;
-          console.log("LONG-FLAGGED", string, best);
+          // console.log("LONG-FLAGGED", string, best);
         }
       }
     }
