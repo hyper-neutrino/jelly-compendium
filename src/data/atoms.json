@@ -958,8 +958,8 @@
   },
   {
     "symbol": "×",
-    "id": "multiply",
-    "name": "Multiply",
+    "id": "multiplication",
+    "name": "Multiplication",
     "arity": 2,
     "keywords": ["multiply", "multiplication", "times"],
     "tags": ["math", "number", "vectorize"],
@@ -969,8 +969,8 @@
   },
   {
     "symbol": "÷",
-    "id": "divide",
-    "name": "Divide",
+    "id": "division",
+    "name": "Division",
     "arity": 2,
     "keywords": ["divide", "division", "ratio", "quotient"],
     "tags": ["math", "number", "vectorize"],
