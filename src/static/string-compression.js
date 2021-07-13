@@ -16,18 +16,24 @@ for (var x in dictionary.long) {
   dictmap.long[dictionary.long[x]] = x;
 }
 
-function field_updated(element) {
+var warning = false;
+var live = true;
+
+function field_updated(element, force = false) {
+  if (!live && !force) return;
   var value = element.value;
   if ([...value].some(function(x) {
     return x != "\n" && codepage.indexOf(x) == -1;
   })) {
     $("#failed").show();
     $("#outputbox").hide();
+    $("#warning").hide();
   } else {
     $("#failed").hide();
     $("#outputbox").show();
     if (value.match(/^\s*$/)) {
       $("#output").val("");
+      $("#warning").hide();
     } else {
       if (value.replace(/"(\\.|[^"])*"|'(\\.|[^'])*'/g, "").match(/^[\[\],\s]*$/)) {
         try {
@@ -37,10 +43,22 @@ function field_updated(element) {
 
         }
       }
+      warning = false;
       $("#output").val(compress(pilcrowify(value)));
+      if (warning) {
+        $("#warning").show();
+      } else {
+        $("#warning").hide();
+      }
     }
   }
   M.textareaAutoResize($("#output"));
+}
+
+function toggle_live() {
+  live ^= true;
+  $("#toggle-live").html((live ? "DISABLE" : "ENABLE") + " LIVE COMPRESSION");
+  $("#update").prop("disabled", live);
 }
 
 $(document).ready(function() {
@@ -134,6 +152,7 @@ function compressed_string(value) {
   } else if (!Array.isArray(value) && [...value].every(function(x) {
     return codepage.indexOf(x) >= 32 && codepage.indexOf(x) < 128;
   })) {
+    if (value[value.length - 1] === " ") warning = true;
     var integer = recompress(value)[0];
     builder = "»";
     while (integer) {
