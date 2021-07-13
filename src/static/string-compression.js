@@ -3,6 +3,19 @@ let codepage  = "¡¢£¤¥¦©¬®µ½¿€ÆÇÐÑ×ØŒÞßæçðıȷñ÷øœ
     codepage += "°¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ƁƇƊƑƓƘⱮƝƤƬƲȤɓƈɗƒɠɦƙɱɲƥʠɼʂƭʋȥẠḄḌẸḤỊḲḶṂṆỌṚṢṬỤṾẈỴẒȦḂ";
     codepage += "ĊḊĖḞĠḢİĿṀṄȮṖṘṠṪẆẊẎŻạḅḍẹḥịḳḷṃṇọṛṣṭ§Äẉỵẓȧḃċḋėḟġḣŀṁṅȯṗṙṡṫẇẋẏż«»‘’“”";
 
+let dictmap = {
+  "short": {},
+  "long": {}
+}
+
+for (var x in dictionary.short) {
+  dictmap.short[dictionary.short[x]] = x;
+}
+
+for (var x in dictionary.long) {
+  dictmap.long[dictionary.long[x]] = x;
+}
+
 function field_updated(element) {
   var value = element.value;
   if ([...value].some(function(x) {
@@ -32,7 +45,6 @@ $(document).ready(function() {
 });
 
 function compress(value, surround_list = false) {
-  return compressed_string(value);
   var converted = "";
   for (var f of [trivial, char_list, double_char, compressed_string]) {
     var c = f(value);
@@ -100,7 +112,7 @@ function double_char(value) {
   }
 }
 
-var cache = {"Hello, World!": 51614827202531n}
+var cache = {}
 
 function compressed_string(value) {
   if (Array.isArray(value) && value.every(function(x) {
@@ -108,19 +120,20 @@ function compressed_string(value) {
       return codepage.indexOf(k) >= 32 && codepage.indexOf(k) < 128;
     });
   })) {
-    return value.map(function(x) {
+    var k = value.map(function(x) {
       var k = compressed_string(x);
       return k.substring(0, k.length - 1);
     }).join("") + "»";
+    if (value.length == 1) return "[" + k + "]";
+    return k;
   } else if (!Array.isArray(value) && [...value].every(function(x) {
-    console.log(x);
     return codepage.indexOf(x) >= 32 && codepage.indexOf(x) < 128;
   })) {
-    var integer = recompress(value);
+    var integer = recompress(value)[0];
     builder = "»";
     while (integer) {
-      var digit = integer % 250n;
-      if (digit == 0n) digit = 250n;
+      var digit = (integer % 250n) || 250n;
+      integer -= digit;
       integer /= 250n;
       builder = codepage[digit - 1n] + builder;
     }
@@ -129,24 +142,85 @@ function compressed_string(value) {
 }
 
 let MAX_DICT_LEN = 58;
+let SHORT_SIZE = 20453n;
+let LONG_SIZE = 227845n;
 
 function recompress(string) {
-  if (cache[string] !== undefined) {
-    return cache[string];
-  }
-  var DP = Array(string.length + 1).fill(0n);
-  var progress = "";
-  for (var index = string.length - 1; index >= 0; index--) {
-    progress = string[index] + progress;
-    if (cache[progress] !== undefined) {
-      DP[index] = cache[progress];
+  if (string == "") return [0n, 1n];
+  if (cache[string] !== undefined) return cache[string];
+  // trivially insert the last character in (mode 0)
+  var last = recompress(string.substring(0, string.length - 1));
+  var best = [last[0] + last[1] * 3n * BigInt(string[string.length - 1] == "¶" || string[string.length - 1] == "\n" ? 95 : string.charCodeAt(string.length - 1) - 32), last[1] * 3n * 96n];
+  console.log("TRIVIAL", string, best);
+  // insert the last word in unmodified (mode 1)
+  for (var lookback = 1; lookback <= MAX_DICT_LEN; lookback++) {
+    if (lookback > string.length) {
+      break;
+    } else if (lookback == string.length) {
+      var find = string;
+      var rem = "";
     } else {
-      DP[index] = compressor_insert_character(DP[index + 1], string[index]);
+      if (string[string.length - lookback - 1] != " ") continue;
+      var find = string.substring(string.length - lookback);
+      var rem = string.substring(0, string.length - lookback - 1);
+    }
+    if (dictmap.short[find] !== undefined) {
+      var last = recompress(rem);
+      var idea = last[0] + last[1] * (1n + 3n * (1n + 2n * BigInt(dictmap.short[find])));
+      if (idea < best[0]) {
+        best[0] = idea;
+        best[1] = last[1] * 3n * 2n * SHORT_SIZE;
+        console.log("SHORT-NORMAL", string, best);
+      }
+    } else if (dictmap.long[find] !== undefined) {
+      var last = recompress(rem);
+      var idea = last[0] + last[1] * (1n + 3n * (2n * BigInt(dictmap.long[find])));
+      if (idea < best[0]) {
+        best[0] = idea;
+        best[1] = last[1] * 3n * 2n * LONG_SIZE;
+        console.log("LONG-NORMAL", string, best);
+      }
     }
   }
-  return DP[0];
-}
-
-function compressor_insert_character(integer, character) {
-  return 3n * (96n * integer + BigInt(codepage.indexOf(character)) - 32n);
+  // insert the last word with flags
+  for (var lookback = 1; lookback <= MAX_DICT_LEN; lookback++) {
+    if (lookback > string.length) break;
+    for (var flag = 0n; flag < 3n; flag++) {
+      var find = string.substring(string.length - lookback);
+      if (flag != 1n) find = (find[0] == find[0].toUpperCase() ? find[0].toLowerCase() : find[0].toUpperCase()) + find.substring(1);
+      if (flag != 0n) {
+        if (lookback + 1 == string.length && string[0] == " ") {
+          var rem = "";
+        } else {
+          var rem = string.substring(0, string.length - lookback);
+        }
+      } else {
+        if (lookback == string.length) {
+          var rem = "";
+        } else if (string[string.length - lookback - 1] != " ") {
+          continue;
+        } else {
+          rem = string.substring(0, string.length - lookback - 1);
+        }
+      }
+      if (dictmap.short[find] !== undefined) {
+        var last = recompress(rem);
+        var idea = last[0] + last[1] * (2n + 3n * (flag + 3n * (1n + 2n * BigInt(dictmap.short[find]))));
+        if (idea < best[0]) {
+          best[0] = idea;
+          best[1] = last[1] * 3n * 3n * 2n * SHORT_SIZE;
+          console.log("SHORT-FLAGGED", string, best);
+        }
+      } else if (dictmap.long[find] !== undefined) {
+        var last = recompress(rem);
+        var idea = last[0] + last[1] * (2n + 3n * (flag + 3n * (2n * BigInt(dictmap.long[find]))));
+        if (idea < best[0]) {
+          best[0] = idea;
+          best[1] = last[1] * 3n * 3n * 2n * LONG_SIZE;
+          console.log("LONG-FLAGGED", string, best);
+        }
+      }
+    }
+  }
+  return cache[string] = best;
 }
