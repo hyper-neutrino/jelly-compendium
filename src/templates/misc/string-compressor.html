@@ -37,9 +37,10 @@
     <label for="value">Value to compress</label>
   </div>
   <br /><br />
-  <div class="input-field">
+  <div id="outputbox" class="input-field">
     <textarea id="output" class="materialize-textarea monospace" readonly placeholder="Optimal representation will appear here."></textarea>
   </div>
+  <p id="failed" hidden>Jelly cuts characters that aren't in its codepage out of its code. You will need to use <a href='/atoms/chr'><code>Ọ</code> (Chr)</a> on the codepoint to create those characters.</p>
 {% endblock %}
 
 {% block tail %}

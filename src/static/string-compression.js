@@ -21,19 +21,24 @@ function field_updated(element) {
   if ([...value].some(function(x) {
     return x != "\n" && codepage.indexOf(x) == -1;
   })) {
-    $("#output").val("Jelly cuts characters that aren't in its codepage out of its code. You will need to use <a href='/atoms/chr'><code>Ọ</code> (Chr)</a> on the codepoint to create those characters.");
-  } else if (value.match(/^\s*$/)) {
-    $("#output").val("");
+    $("#failed").show();
+    $("#outputbox").hide();
   } else {
-    if (value.replace(/"(\\.|[^"])*"|'(\\.|[^'])*'/g, "").match(/^[\[\],\s]*$/)) {
-      try {
-        value = eval("[" + value + "]");
-        if (value.length == 1) value = value[0];
-      } catch {
+    $("#failed").hide();
+    $("#outputbox").show();
+    if (value.match(/^\s*$/)) {
+      $("#output").val("");
+    } else {
+      if (value.replace(/"(\\.|[^"])*"|'(\\.|[^'])*'/g, "").match(/^[\[\],\s]*$/)) {
+        try {
+          value = eval("[" + value + "]");
+          if (value.length == 1) value = value[0];
+        } catch {
 
+        }
       }
+      $("#output").val(compress(pilcrowify(value)));
     }
-    $("#output").val(compress(pilcrowify(value)));
   }
   M.textareaAutoResize($("#output"));
 }
