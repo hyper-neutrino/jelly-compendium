@@ -83,7 +83,6 @@ $(document).ready(function() {
       add_argument(document.getElementById("append-argument")).children[1].children[0].value = x;
     }
     updateAll();
-    update_explain_link();
   }
 
   $(".add-argument").click(function(e) {
@@ -94,7 +93,6 @@ $(document).ready(function() {
   });
   $(".tio-field").on("input", function(e) {
     field_updated(e.currentTarget);
-    update_explain_link();
   });
   $("#header, #code, #footer, #stdin, .argument").on("focusin", function(e) {
     window.last_focus = e.currentTarget.id;
@@ -139,7 +137,6 @@ function rm_argument(e) {
 }
 
 function update_argument_count() {
-  update_explain_link();
   var args = document.querySelectorAll(".argument-box").length;
   if (args == 0) {
     $("#args-label").text("Arguments (Niladic)");
@@ -284,10 +281,4 @@ function tio() {
   window.open(tio_permalink($("#header").val(), $("#code").val(), $("#footer").val(), $("#stdin").val(), [...$(".argument")].map(function(e) {
     return e.value;
   })));
-}
-
-function update_explain_link() {
-  var code = get_code();
-  var arity = Math.min(2, $(".argument").length);
-  document.getElementById("explainlink").href = "/explain?code=" + encodeURIComponent(escape(code)) + "&arity=" + arity;
 }
