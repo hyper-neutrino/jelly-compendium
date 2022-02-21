@@ -121,7 +121,7 @@
     "id": "start-reversed-dyadic-chain",
     "name": "Start Reversed Dyadic Chain",
     "keywords": ["start", "separate", "new", "reversed", "swapped", "flipped", "arguments", "dyadic", "chain"],
-    "tags": ["separator", "separator"],
+    "tags": ["separator"],
     "tagline": "Begin a separate dyadic chain with reversed arguments.",
     "description": "See the <a href='/beginners#separators'>beginners' page</a> on chain separators for more information."
   },
